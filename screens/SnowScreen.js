@@ -85,7 +85,7 @@ export default class SnowScreen extends Component {
   render() {
     const resizeMode = 'cover';
     const aBasin = this.state.aBasin;
-    const keyston = this.state.keystone;
+    const keystone = this.state.keystone;
     console.log(`aBasin.pastDaySnow:  ${this.state.aBasin}`)
     //console.log(this.state)
     return (
@@ -97,9 +97,29 @@ export default class SnowScreen extends Component {
           imageStyle={{ resizeMode }}
           source={require('../assets/images/snowbg.png')}
         >
-          <Text style={styles.weatherCityText}>{`past 24 hrs: ${aBasin.pastDaySnow}`}</Text>
-          <Text style={styles.weatherDescriptionText}>{`past 3 days: ${aBasin.threeDaySnow}`}</Text>
-          <Text style={styles.weatherDescriptionText}>{`base: ${aBasin.baseSnow}`}</Text>
+          <View style={styles.contentContainer}>
+            <Image
+              style={styles.iconImage}
+              source={require('../assets/images/abasin.png')}
+            ></Image>
+            <View style={styles.textHolder}>
+              <Text style={styles.weatherDescriptionText}>{`24 hr: ${aBasin.pastDaySnow}`}</Text>
+              <Text style={styles.weatherDescriptionText}>{`3 day: ${aBasin.threeDaySnow}`}</Text>
+              <Text style={styles.weatherDescriptionText}>{`base: ${aBasin.baseSnow}`}</Text>
+            </View>
+          </View>
+
+          <View style={styles.contentContainer}>
+            <Image
+              style={styles.iconImage}
+              source={require('../assets/images/keystone.png')}
+            ></Image>
+            <View style={styles.textHolder}>
+              <Text style={styles.weatherDescriptionText}>{`${keystone.currentTemp}`}</Text>
+              <Text style={styles.weatherDescriptionText}>{`${keystone.currentDesc}`}</Text>
+              <Text style={styles.weatherDescriptionText}>{`${keystone.weatherDesc}`}</Text>
+            </View>
+          </View>
 
         </ImageBackground>
 

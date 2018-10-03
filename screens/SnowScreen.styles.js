@@ -13,6 +13,17 @@ export default HomeScreenStyles = StyleSheet.create({
   },
   contentContainer: {
     paddingTop: 30,
+    flex: 0, 
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+  iconImage: {
+    borderRadius: 10,
+    margin: 20,
+    width: 80, 
+    height: 80,
+
   },
   weatherCityText: {
     textAlign: 'center',
@@ -20,7 +31,7 @@ export default HomeScreenStyles = StyleSheet.create({
     fontSize: 30,
     marginTop: 80,
     marginBottom: 20,
-  },
+  },  
   weatherTempText: {
     textAlign: 'center',
     color: 'white',
@@ -29,12 +40,16 @@ export default HomeScreenStyles = StyleSheet.create({
     marginTop: 0,
     marginBottom: 20,
   },
+  textHolder: {
+    marginTop: 18,
+    width: 250
+  },
   weatherDescriptionText: {
     textAlign: 'center',
     color: 'white',
-    fontSize: 30,
+    fontSize: 18,
     marginTop: 0,
-    marginBottom: 20,
+    marginBottom: 8,
   },
   welcomeImage: {
     width: 100,
