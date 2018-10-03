@@ -6,7 +6,7 @@ import AppNavigator from './navigation/AppNavigator';
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
-    weatherData: weatherData
+    //weatherData: weatherData
   };
 
   render() {
