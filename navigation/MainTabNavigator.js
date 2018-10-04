@@ -4,9 +4,9 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import WeatherScreen from '../screens/WeatherScreen';
-import LinksScreen from '../screens/SnowScreen';
-import SettingsScreen from '../screens/SettingsScreen';
 import SnowScreen from '../screens/SnowScreen';
+import TrafficScreen from '../screens/TrafficScreen'
+import SettingsScreen from '../screens/SettingsScreen';
 
 const navOps = {
   navigationOptions: {
@@ -57,6 +57,27 @@ SnowStack.navigationOptions = {
   }
 };
 
+const TrafficStack = createStackNavigator(
+  {
+    Snow: TrafficScreen
+  },
+  navOps
+  );
+
+TrafficStack.navigationOptions = {
+  tabBarLabel: 'Traffic',
+  tabBarOptions: {
+    activeTintColor: '#AED6F1',
+    inactiveTintColor: '#F2F3F4',
+    style: {
+      backgroundColor: 'black',
+    },
+  },
+  tabBarIcon : () => {
+    return <Image source={require('../assets/images/traffic.png')} style={{width:25,height:25, marginTop:5}} />
+  }
+};
+
 const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
@@ -86,6 +107,7 @@ export default createBottomTabNavigator(
   {
     WeatherStack,
     SnowStack,
+    TrafficStack,
     SettingsStack,
   },
   

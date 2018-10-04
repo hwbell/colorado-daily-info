@@ -83,6 +83,7 @@ export default class SnowScreen extends Component {
   }
 
   render() {
+    
     const resizeMode = 'cover';
     const aBasin = this.state.aBasin;
     const keystone = this.state.keystone;
