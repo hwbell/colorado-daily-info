@@ -83,7 +83,7 @@ export default class SnowScreen extends Component {
             <View style={styles.textHolder}>
               {traffic.weekend.map( (p) => {
                 return (
-                  <Text style={styles.trafficDescriptionText}>{p}</Text>
+                  <Text key={ p.slice(0, p.indexOf('y')) } style={styles.trafficDescriptionText}>{p}</Text>
                 )
               })}
             </View>
