@@ -19,7 +19,7 @@ export default HomeScreenStyles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   textHolder: {
-    paddingTop: 35,
+    paddingTop: 25,
     paddingLeft: 30,
     width: 250,
   },
@@ -29,6 +29,7 @@ export default HomeScreenStyles = StyleSheet.create({
   iconImage: {
     borderRadius: 10,
     marginRight: 20,
+    marginTop: 10,
     width: 80, 
     height: 80,
 
@@ -58,7 +59,10 @@ export default HomeScreenStyles = StyleSheet.create({
     marginBottom: 20,
   },
   weatherForecastText: {
-    color: 'white'
+    color: 'white',
+    fontSize: 20,
+    fontFamily: 'Avenir-Roman',
+    fontWeight: 'bold'
   }
 });
 

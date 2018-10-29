@@ -72,7 +72,7 @@ export default class SnowScreen extends Component {
           style={{ flex: 1 }}
           opacity={1}
           imageStyle={{ resizeMode }}
-          source={require('../assets/images/trafficbg.jpg')}
+          source={require('../assets/images/backgrounds/trafficbg.jpg')}
         >
 
           <View style={styles.contentContainer}>

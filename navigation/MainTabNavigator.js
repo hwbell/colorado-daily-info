@@ -32,7 +32,7 @@ WeatherStack.navigationOptions = {
     },
   },
   tabBarIcon : () => {
-    return <Image source={require('../assets/images/weather.png')} style={{width:30,height:30, marginTop:5}} />
+    return <Image source={require('../assets/images/icons/weather.png')} style={{width:30,height:30, marginTop:5}} />
   }
 };
 
@@ -53,7 +53,7 @@ SnowStack.navigationOptions = {
     },
   },
   tabBarIcon : () => {
-    return <Image source={require('../assets/images/snow.png')} style={{width:25,height:25, marginTop:5}} />
+    return <Image source={require('../assets/images/icons/snow.png')} style={{width:25,height:25, marginTop:5}} />
   }
 };
 
@@ -74,7 +74,7 @@ TrafficStack.navigationOptions = {
     },
   },
   tabBarIcon : () => {
-    return <Image source={require('../assets/images/traffic.png')} style={{width:25,height:25, marginTop:5}} />
+    return <Image source={require('../assets/images/icons/traffic.png')} style={{width:25,height:25, marginTop:5}} />
   }
 };
 

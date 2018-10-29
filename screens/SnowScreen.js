@@ -96,12 +96,12 @@ export default class SnowScreen extends Component {
           style={{ flex: 1 }}
           opacity={1}
           imageStyle={{ resizeMode }}
-          source={require('../assets/images/snowbg.png')}
+          source={require('../assets/images/backgrounds/snowbg.png')}
         >
           <View style={styles.contentContainer}>
             <Image
               style={styles.iconImage}
-              source={require('../assets/images/abasin.png')}
+              source={require('../assets/images/icons/abasin.png')}
             ></Image>
             <View style={styles.textHolder}>
               <Text style={styles.weatherDescriptionText}>{`24 hr: ${aBasin.pastDaySnow}`}</Text>
@@ -113,7 +113,7 @@ export default class SnowScreen extends Component {
           <View style={styles.contentContainer}>
             <Image
               style={styles.iconImage}
-              source={require('../assets/images/keystone.png')}
+              source={require('../assets/images/icons/keystone.png')}
             ></Image>
             <View style={styles.textHolder}>
               <Text style={styles.weatherDescriptionText}>{`${keystone.currentTemp}`}</Text>

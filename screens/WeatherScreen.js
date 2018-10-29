@@ -78,7 +78,9 @@ const makeForeCastList = (list) => {
         // })
         condensedList.push({
           desc: obj.weather[0].description,
-          icon: obj.weather[0].icon
+          icon: obj.weather[0].icon,
+          temp: convertTemp(obj.main.temp),
+          date: obj.dt_txt.slice(5,10)
         });
       }
     });
@@ -149,7 +151,7 @@ export default class WeatherScreen extends Component {
           style={{ flex: 1 }}
           opacity={1}
           imageStyle={{ resizeMode: 'stretch' }}
-          source={require('../assets/images/rain.jpg')}
+          source={require('../assets/images/backgrounds/rain.jpg')}
         >
 
           <View style={styles.largeTextHolder}>
@@ -166,6 +168,8 @@ export default class WeatherScreen extends Component {
               <View key={day} style={styles.contentContainer}>
 
                 <View style={styles.textHolder}>
+                  <Text style={styles.weatherForecastText}>{day.date}</Text>
+                  <Text style={styles.weatherForecastText}>{day.temp} &deg;F</Text>
                   <Text style={styles.weatherForecastText}>{day.desc}</Text>
                 </View>
 
