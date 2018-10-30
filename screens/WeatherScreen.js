@@ -19,6 +19,87 @@ const text = {
   'header': 'Weather'
 }
 
+// get Icon from custom made list instead of openWeatherMap's built in
+// icons since they aren't very good
+const weatherIconList = {
+  '01d': {
+    icon: '',
+    descr: 'clear sky',
+  },
+  '01n': {
+    icon: '',
+    descr: 'clear sky',
+  },
+  '02d': {
+    icon: '',
+    descr: 'few clouds',
+  },
+  '02n': {
+    icon: '',
+    descr: 'few clouds',
+  },
+  '03d': {
+    icon: '',
+    descr: 'scattered clouds',
+  },
+  '03n': {
+    icon: '',
+    descr: 'scattered clouds',
+  },
+  '04d': {
+    icon: '',
+    descr: 'broken clouds',
+  },
+  '04n': {
+    icon: '',
+    descr: 'broken clouds',
+  },
+  '09n': {
+    icon: '',
+    descr: 'shower rain',
+  },
+  '09d': {
+    icon: '',
+    descr: 'broken clouds',
+  },
+  '10d': {
+    icon: '',
+    descr: 'rain',
+  },
+  '10n': {
+    icon: '',
+    descr: 'rain',
+  },
+  '11d': {
+    icon: '',
+    descr: 'thunderstorm',
+  },
+  '11n': {
+    icon: '',
+    descr: 'thunderstorm',
+  },
+  '13d': {
+    icon: '',
+    descr: 'snow',
+  },
+  '13n': {
+    icon: '',
+    descr: 'snow',
+  },
+  '50d': {
+    icon: '',
+    descr: 'mist',
+  },
+  '50n': {
+    icon: '',
+    descr: 'mist',
+  },
+
+}
+
+const getWeatherIcon = (id) => {
+
+}
 
 // makeForeCastList() sorts list into day separated format, and
 // extracts one daily time point from the forecast, for the 
