@@ -19,78 +19,96 @@ const text = {
   'header': 'Weather'
 }
 
-// get Icon from custom made list instead of openWeatherMap's built in
-// icons since they aren't very good
+// get bg and Icon from custom made list instead of openWeatherMap's built in
+// icons since they aren't very good. also they don't have backgrounds.
 const weatherIconList = {
   '01d': {
+    bg: '../assets/weather/backgrounds/day/clear-day.png',
     icon: '',
     descr: 'clear sky',
   },
   '01n': {
+    bg: '../assets/weather/backgrounds/night/clear-night.png',
     icon: '',
     descr: 'clear sky',
   },
   '02d': {
+    bg: '../assets/weather/backgrounds/day/few-clouds-day.png',
     icon: '',
     descr: 'few clouds',
   },
   '02n': {
+    bg: '../assets/weather/backgrounds/night/few-clouds-night.png',
     icon: '',
     descr: 'few clouds',
   },
   '03d': {
+    bg: '../assets/weather/backgrounds/day/few-clouds-day.png',
     icon: '',
     descr: 'scattered clouds',
   },
   '03n': {
+    bg: '../assets/weather/backgrounds/night/few-clouds-night.png',
     icon: '',
     descr: 'scattered clouds',
   },
   '04d': {
+    bg: '../assets/weather/backgrounds/day/few-clouds-day.png',
     icon: '',
     descr: 'broken clouds',
   },
   '04n': {
+    bg: '../assets/weather/backgrounds/night/few-clouds-night.png',
     icon: '',
     descr: 'broken clouds',
   },
-  '09n': {
+  '09d': {
+    bg: '../assets/weather/backgrounds/day/rain-day.png',
     icon: '',
     descr: 'shower rain',
   },
-  '09d': {
+  '09n': {
+    bg: '../assets/weather/backgrounds/night/rain-night.png',
     icon: '',
     descr: 'broken clouds',
   },
   '10d': {
+    bg: '../assets/weather/backgrounds/day/rain-day.png',
     icon: '',
     descr: 'rain',
   },
   '10n': {
+    bg: '../assets/weather/backgrounds/night/rain-night.png',
     icon: '',
     descr: 'rain',
   },
   '11d': {
+    bg: '../assets/weather/backgrounds/thunderstorm.jpg',
     icon: '',
     descr: 'thunderstorm',
   },
   '11n': {
+    bg: '../assets/weather/backgrounds/thunderstorm.jpg',
     icon: '',
     descr: 'thunderstorm',
   },
   '13d': {
+    bg: '../assets/weather/backgrounds/day/snow-day.png',
     icon: '',
     descr: 'snow',
   },
   '13n': {
+    bg: '../assets/weather/backgrounds/night/snow-night.png',
     icon: '',
     descr: 'snow',
   },
   '50d': {
+    bg: '',
     icon: '',
     descr: 'mist',
   },
   '50n': {
+    bg: '../assets/weather/backgrounds/mist.jpg',
     icon: '',
     descr: 'mist',
   },
