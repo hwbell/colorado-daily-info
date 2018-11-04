@@ -46,10 +46,12 @@ export default HomeScreenStyles = StyleSheet.create({
   },
   weatherDescriptionText: {
     textAlign: 'center',
-    color: 'white',
-    fontSize: 18,
     marginTop: 0,
-    marginBottom: 8,
+    marginBottom: 0,
+    color: 'white',
+    fontSize: 20,
+    fontFamily: 'Avenir-Roman',
+    fontWeight: 'bold'
   },
   welcomeImage: {
     width: 100,

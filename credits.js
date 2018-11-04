@@ -15,7 +15,7 @@ const credits = {
 
   clearDayBackground: '',
   clearNightBackground: '',
-  rainDayBackground: '',
+  rainDayBackground: '<a href="https://www.freepik.com/free-vector/classic-monsoon-season-composition-with-realistic-design_2686584.htm">Designed by Freepik</a>',
   rainNightBackground: '<a href="https://www.freepik.com/free-vector/classic-monsoon-season-composition-with-realistic-design_2686584.htm">Designed by Freepik</a>',
 
   fewCloudsBackground: '<a href="https://www.freepik.com/free-vector/sky-with-clouds-and-city-background-in-flat-style_2126734.htm">Designed by Freepik</a>',

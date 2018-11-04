@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import {
   View,
+  ScrollView,
   AppRegistry,
   Image,
   ImageBackground,
@@ -66,29 +67,29 @@ export default class SnowScreen extends Component {
     const traffic = this.state.traffic;
     
     return (
-
+      
       <View style={styles.container}>
         <ImageBackground
           style={{ flex: 1 }}
           opacity={1}
           imageStyle={{ resizeMode }}
-          source={require('../assets/images/backgrounds/trafficbg.jpg')}
+          source={require('../assets/traffic/backgrounds/traffic.png')}
         >
-
+          <ScrollView style={styles.container}>
           <View style={styles.contentContainer}>
             {/* <Image
               style={styles.iconImage}
               source={require('../assets/images/traffic.png')}
             ></Image> */}
             <View style={styles.textHolder}>
-              {traffic.weekend.map( (p) => {
+              {traffic.weekend.map( (p, i) => {
                 return (
-                  <Text key={ p.slice(0, p.indexOf('y')) } style={styles.trafficDescriptionText}>{p}</Text>
+                  <Text key={i} style={styles.trafficDescriptionText}>{p}</Text>
                 )
               })}
             </View>
           </View>
-
+          </ScrollView>
         </ImageBackground>
 
       </View>

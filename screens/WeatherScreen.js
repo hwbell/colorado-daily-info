@@ -8,10 +8,15 @@ import {
   ImageBackground,
   Text,
   TouchableHighlight,
-  Button
+  Button,
+  StyleSheet
 } from 'react-native';
 
 import styles from './WeatherScreen.styles';
+
+import { BlurView } from 'expo';
+
+const uri = 'https://s3.amazonaws.com/exp-icon-assets/ExpoEmptyManifest_192.png';
 
 //const navigation = this.props.navigation;
 
@@ -19,103 +24,99 @@ const text = {
   'header': 'Weather'
 }
 
-// get bg and Icon from custom made list instead of openWeatherMap's built in
+// get bg and icon from custom made list instead of openWeatherMap's built in
 // icons since they aren't very good. also they don't have backgrounds.
-const weatherIconList = {
+const weatherImagesList = {
   '01d': {
-    bg: '../assets/weather/backgrounds/day/clear-day.png',
-    icon: '',
+    bg: require('../assets/weather/backgrounds/day/clear-day.png'),
+    icon: require('../assets/weather/icons/day/clear-day.png'),
     descr: 'clear sky',
   },
   '01n': {
-    bg: '../assets/weather/backgrounds/night/clear-night.png',
-    icon: '',
+    bg: require('../assets/weather/backgrounds/night/clear-night.png'),
+    icon: require('../assets/weather/icons/night/clear-night.png'),
     descr: 'clear sky',
   },
   '02d': {
-    bg: '../assets/weather/backgrounds/day/few-clouds-day.png',
-    icon: '',
+    bg: require('../assets/weather/backgrounds/day/few-clouds-day.jpg'),
+    icon: require('../assets/weather/icons/day/few-clouds-day.png'),
     descr: 'few clouds',
   },
   '02n': {
-    bg: '../assets/weather/backgrounds/night/few-clouds-night.png',
-    icon: '',
+    bg: require('../assets/weather/backgrounds/night/few-clouds-night.png'),
+    icon: require('../assets/weather/icons/night/few-clouds-night.png'),
     descr: 'few clouds',
   },
   '03d': {
-    bg: '../assets/weather/backgrounds/day/few-clouds-day.png',
-    icon: '',
+    bg: require('../assets/weather/backgrounds/day/few-clouds-day.jpg'),
+    icon: require('../assets/weather/icons/day/few-clouds-day.png'),
     descr: 'scattered clouds',
   },
   '03n': {
-    bg: '../assets/weather/backgrounds/night/few-clouds-night.png',
-    icon: '',
+    bg: require('../assets/weather/backgrounds/night/few-clouds-night.png'),
+    icon: require('../assets/weather/icons/night/few-clouds-night.png'),
     descr: 'scattered clouds',
   },
   '04d': {
-    bg: '../assets/weather/backgrounds/day/few-clouds-day.png',
-    icon: '',
+    bg: require('../assets/weather/backgrounds/day/few-clouds-day.jpg'),
+    icon: require('../assets/weather/icons/day/broken-clouds-day.png'),
     descr: 'broken clouds',
   },
   '04n': {
-    bg: '../assets/weather/backgrounds/night/few-clouds-night.png',
-    icon: '',
+    bg: require('../assets/weather/backgrounds/night/few-clouds-night.png'),
+    icon: require('../assets/weather/icons/night/broken-clouds-night.png'),
     descr: 'broken clouds',
   },
   '09d': {
-    bg: '../assets/weather/backgrounds/day/rain-day.png',
-    icon: '',
+    bg: require('../assets/weather/backgrounds/day/rain-day.jpg'),
+    icon: require('../assets/weather/icons/rain.png'),
     descr: 'shower rain',
   },
   '09n': {
-    bg: '../assets/weather/backgrounds/night/rain-night.png',
-    icon: '',
+    bg: require('../assets/weather/backgrounds/night/rain-night.jpg'),
+    icon: require('../assets/weather/icons/rain.png'),
     descr: 'broken clouds',
   },
   '10d': {
-    bg: '../assets/weather/backgrounds/day/rain-day.png',
-    icon: '',
+    bg: require('../assets/weather/backgrounds/day/rain-day.jpg'),
+    icon: require('../assets/weather/icons/rain.png'),
     descr: 'rain',
   },
   '10n': {
-    bg: '../assets/weather/backgrounds/night/rain-night.png',
-    icon: '',
+    bg: require('../assets/weather/backgrounds/night/rain-night.jpg'),
+    icon: require('../assets/weather/icons/rain.png'),
     descr: 'rain',
   },
   '11d': {
-    bg: '../assets/weather/backgrounds/thunderstorm.jpg',
-    icon: '',
+    bg: require('../assets/weather/backgrounds/thunderstorm.jpg'),
+    icon: require('../assets/weather/icons/thunderstorm.png'),
     descr: 'thunderstorm',
   },
   '11n': {
-    bg: '../assets/weather/backgrounds/thunderstorm.jpg',
-    icon: '',
+    bg: require('../assets/weather/backgrounds/thunderstorm.jpg'),
+    icon: require('../assets/weather/icons/thunderstorm.png'),
     descr: 'thunderstorm',
   },
   '13d': {
-    bg: '../assets/weather/backgrounds/day/snow-day.png',
-    icon: '',
+    bg: require('../assets/weather/backgrounds/day/snow-day.png'),
+    icon: require('../assets/weather/icons/snow.png'),
     descr: 'snow',
   },
   '13n': {
-    bg: '../assets/weather/backgrounds/night/snow-night.png',
-    icon: '',
+    bg: require('../assets/weather/backgrounds/night/snow-night.png'),
+    icon: require('../assets/weather/icons/snow.png'),
     descr: 'snow',
   },
-  '50d': {
-    bg: '',
-    icon: '',
-    descr: 'mist',
-  },
-  '50n': {
-    bg: '../assets/weather/backgrounds/mist.jpg',
-    icon: '',
-    descr: 'mist',
-  },
-
-}
-
-const getWeatherIcon = (id) => {
+  // '50d': {
+  //   bg: require('../assets/weather/backgrounds/mist.jpg)'),
+  //   icon: '../assets/weather/icons/mist.jpg',
+  //   descr: 'mist',
+  // },
+  // '50n': {
+  //   bg: require('../assets/weather/backgrounds/mist.jpg'),
+  //   icon: '../assets/weather/icons/mist.jpg',
+  //   descr: 'mist',
+  // },
 
 }
 
@@ -194,12 +195,21 @@ const convertTemp = (kelvin) => {
   return Math.floor(farenheit);
 }
 
+const getWeatherBackground = (id) => {
+  console.log(id);
+  return weatherImagesList[id].bg;
+}
+
+const getWeatherIcon = (id) => {
+  console.log(id);
+  return weatherImagesList[id].icon;
+}
+
 export default class WeatherScreen extends Component {
   state = {
     city: '',
     country: '',
     todayWeather: '',
-    forecast: [],
     currentTemp: '',
     highTemp: '',
     lowTemp: '',
@@ -207,6 +217,9 @@ export default class WeatherScreen extends Component {
     humidity: '',
     windSpeed: '',
     windDir: '',
+    forecast: [],
+    icon: '',
+    background: '',
     
   }
 
@@ -215,7 +228,8 @@ export default class WeatherScreen extends Component {
       .then((response) => response.json())
       .then((response) => {
         const todayWeather = response.list[0];
-        //console.log(response);
+        //console.log(weatherImagesList[todayWeather.weather[0].icon]);
+        
         this.setState({
           city: response.city.name,
           country: response.city.country,
@@ -225,12 +239,13 @@ export default class WeatherScreen extends Component {
           highTemp: todayWeather.main.temp_max,
           lowTemp: todayWeather.main.temp_min,
           descr: todayWeather.weather[0].description,
+          iconId: todayWeather.weather[0].icon,  
+          backgroundId: todayWeather.weather[0].icon,
           humidity: todayWeather.main.humidity,
           windSpeed: todayWeather.wind.speed,
           windDir: todayWeather.wind.deg,
-          
         }, function () {
-
+          console.log(`this.state.backgroundId: ${this.state.backgroundId}`)
         });
 
       })
@@ -242,17 +257,21 @@ export default class WeatherScreen extends Component {
   render() {
     const resizeMode = 'cover';
     const condensedForecast = this.state.forecast[1];
-    
+    const backgroundId = this.state.backgroundId;
+
+    const weatherBG = backgroundId ? getWeatherBackground(backgroundId) : getWeatherBackground('01d');
+
     return (
 
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
+        
         <ImageBackground
           style={{ flex: 1 }}
           opacity={1}
-          imageStyle={{ resizeMode: 'stretch' }}
-          source={require('../assets/images/backgrounds/rain.jpg')}
+          imageStyle={{ resizeMode: 'cover'}}
+          source={weatherBG}
         >
-
+        <ScrollView style={styles.container}>
           <View style={styles.largeTextHolder}>
             <Text style={styles.weatherCityText}>{this.state.city}, {this.state.country}</Text>
 
@@ -263,31 +282,35 @@ export default class WeatherScreen extends Component {
           
           { condensedForecast ? 
             condensedForecast.map( (day, i) => {
-            return (
-              <View key={day} style={styles.contentContainer}>
+              
+              let iconSrc = getWeatherIcon(day.icon); 
 
-                <View style={styles.textHolder}>
-                  <Text style={styles.weatherForecastText}>{day.date}</Text>
-                  <Text style={styles.weatherForecastText}>{day.temp} &deg;F</Text>
-                  <Text style={styles.weatherForecastText}>{day.desc}</Text>
+              return (
+                <View key={day.date} style={styles.contentContainer}>
+
+                  <View style={styles.textHolder}>
+                    <Text style={styles.weatherForecastText}>{day.date}</Text>
+                    <Text style={styles.weatherForecastText}>{day.temp} &deg;F</Text>
+                    <Text style={styles.weatherForecastText}>{day.desc}</Text>
+                  </View>
+
+                  <Image
+                    style={styles.iconImage}
+                    source={iconSrc}
+                    // source={iconSrc}
+                  ></Image>
+
                 </View>
-
-                <Image
-                  style={styles.iconImage}
-                  source={{uri: `http://openweathermap.org/img/w/${day.icon}.png`}}
-                ></Image>
-
-              </View>
-            )
+              )
           })
           : null
           }
 
           
-
+          </ScrollView>
         </ImageBackground>
 
-      </ScrollView>
+      </View>
     );
   }
 }

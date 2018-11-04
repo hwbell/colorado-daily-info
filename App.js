@@ -40,7 +40,7 @@ export default class App extends React.Component {
         require('./assets/images//icons/keystone.png'),
         require('./assets/images/icon.png'),
         
-        require('./assets/images/backgrounds/rain.jpg'),
+        // require('./assets/images/backgrounds/rain.jpg'),
         require('./assets/images/icons/snow.png'),
         
         require('./assets/images/backgrounds/snowbg.png'),

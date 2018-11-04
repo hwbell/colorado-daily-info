@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import {
   View,
+  ScrollView,
   AppRegistry,
   Image,
   ImageBackground,
@@ -98,6 +99,7 @@ export default class SnowScreen extends Component {
           imageStyle={{ resizeMode }}
           source={require('../assets/images/backgrounds/snowbg.png')}
         >
+        <ScrollView style={styles.container}>
           <View style={styles.contentContainer}>
             <Image
               style={styles.iconImage}
@@ -121,7 +123,7 @@ export default class SnowScreen extends Component {
               <Text style={styles.weatherDescriptionText}>{`${keystone.weatherDesc}`}</Text>
             </View>
           </View>
-
+          </ScrollView>
         </ImageBackground>
 
       </View>

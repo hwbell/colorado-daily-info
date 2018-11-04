@@ -17,6 +17,7 @@ export default HomeScreenStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'flex-start',
+    backgroundColor: 'rgba(52, 52, 52, 0.2)',
   },
   textHolder: {
     paddingTop: 25,
@@ -24,7 +25,7 @@ export default HomeScreenStyles = StyleSheet.create({
     width: 250,
   },
   largeTextHolder: {
-
+    backgroundColor: 'rgba(52, 52, 52, 0.2)',
   },
   iconImage: {
     borderRadius: 10,

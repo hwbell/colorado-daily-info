@@ -42,14 +42,16 @@ export default HomeScreenStyles = StyleSheet.create({
   },
   textHolder: {
     marginTop: 18,
-    width: 350
+    width: 350,
   },
   trafficDescriptionText: {
     textAlign: 'center',
-    color: 'white',
-    fontSize: 14,
     marginTop: 0,
     marginBottom: 0,
+    color: 'white',
+    fontSize: 20,
+    fontFamily: 'Avenir-Roman',
+    fontWeight: 'bold'
   },
   welcomeImage: {
     width: 100,
