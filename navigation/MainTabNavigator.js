@@ -3,6 +3,8 @@ import { Platform, Image } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
+
+import IntroScreen from '../screens/IntroScreen';
 import WeatherScreen from '../screens/WeatherScreen';
 import SnowScreen from '../screens/SnowScreen';
 import TrafficScreen from '../screens/TrafficScreen'
@@ -12,6 +14,27 @@ const navOps = {
   navigationOptions: {
     header: null
   },
+};
+const IntroStack = createStackNavigator(
+  {
+    Home: IntroScreen,
+  },
+  navOps
+  );
+
+IntroStack.navigationOptions = {
+  showIcon: true, 
+  tabBarLabel: 'Weather',
+  tabBarOptions: {
+    activeTintColor: '#AED6F1',
+    inactiveTintColor: '#F2F3F4',
+    style: {
+      backgroundColor: 'black',
+    },
+  },
+  tabBarIcon : () => {
+    return <Image source={require('../assets/images/icons/weather.png')} style={{width:30,height:30, marginTop:5}} />
+  }
 };
 
 const WeatherStack = createStackNavigator(
@@ -105,6 +128,7 @@ SettingsStack.navigationOptions = {
 
 export default createBottomTabNavigator(
   {
+    IntroStack,
     WeatherStack,
     SnowStack,
     TrafficStack,

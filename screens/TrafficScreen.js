@@ -27,8 +27,8 @@ const parseTrafficInfo = (obj) => {
   // of an array withing the object, which starts with 'TRAVEL FORECAST & TIPS'.
   // Just get the portion between 'WEEKEND TRAVEL FORECAST' and 'Have a great weekend!'.
   let start = weekendTrafficInfo.indexOf('WEEKEND TRAVEL FORECAST');
-  let end = weekendTrafficInfo.indexOf('Have a great weekend!');
-  let weekendDisplayData = weekendTrafficInfo.slice(start, end);
+  let end = weekendTrafficInfo.indexOf('TIPS FOR I-70 MOUNTAIN TRAVEL');
+  let weekendDisplayData = weekendTrafficInfo.slice(start, end-1);
 
   return ({
     traffic: {

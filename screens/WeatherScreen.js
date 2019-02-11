@@ -14,9 +14,6 @@ import {
 
 import styles from './WeatherScreen.styles';
 
-import { BlurView } from 'expo';
-
-const uri = 'https://s3.amazonaws.com/exp-icon-assets/ExpoEmptyManifest_192.png';
 
 //const navigation = this.props.navigation;
 
@@ -24,50 +21,43 @@ const text = {
   'header': 'Weather'
 }
 
-// get bg and icon from custom made list instead of openWeatherMap's built in
-// icons since they aren't very good. also they don't have backgrounds.
+// icon options from the dark sky api:
+//  clear-day, clear-night, rain, snow, sleet, 
+//  wind, fog, cloudy, partly-cloudy-day, or partly-cloudy-night
+
+// assign icons to the 
 const weatherImagesList = {
-  '01d': {
+  'clear-day': {
     bg: require('../assets/weather/backgrounds/day/clear-day.png'),
     icon: require('../assets/weather/icons/day/clear-day.png'),
     descr: 'clear sky',
   },
-  '01n': {
+  'clear-night': {
     bg: require('../assets/weather/backgrounds/night/clear-night.png'),
     icon: require('../assets/weather/icons/night/clear-night.png'),
     descr: 'clear sky',
   },
-  '02d': {
-    bg: require('../assets/weather/backgrounds/day/few-clouds-day.jpg'),
-    icon: require('../assets/weather/icons/day/few-clouds-day.png'),
-    descr: 'few clouds',
-  },
-  '02n': {
-    bg: require('../assets/weather/backgrounds/night/few-clouds-night.png'),
-    icon: require('../assets/weather/icons/night/few-clouds-night.png'),
-    descr: 'few clouds',
-  },
-  '03d': {
+  'partly-cloudy-day': {
     bg: require('../assets/weather/backgrounds/day/few-clouds-day.jpg'),
     icon: require('../assets/weather/icons/day/few-clouds-day.png'),
     descr: 'scattered clouds',
   },
-  '03n': {
+  'partly-cloudy-night': {
     bg: require('../assets/weather/backgrounds/night/few-clouds-night.png'),
     icon: require('../assets/weather/icons/night/few-clouds-night.png'),
     descr: 'scattered clouds',
   },
-  '04d': {
+  'cloudy': {
     bg: require('../assets/weather/backgrounds/day/few-clouds-day.jpg'),
-    icon: require('../assets/weather/icons/day/broken-clouds-day.png'),
+    icon: require('../assets/weather/icons/day/few-clouds-day.png'),
     descr: 'broken clouds',
   },
-  '04n': {
-    bg: require('../assets/weather/backgrounds/night/few-clouds-night.png'),
-    icon: require('../assets/weather/icons/night/broken-clouds-night.png'),
-    descr: 'broken clouds',
+  'fog': {
+    bg: require('../assets/weather/backgrounds/mist.jpg'),
+    icon: require('../assets/weather/icons/mist.png'),
+    descr: 'fog',
   },
-  '09d': {
+  'rain': {
     bg: require('../assets/weather/backgrounds/day/rain-day.jpg'),
     icon: require('../assets/weather/icons/rain.png'),
     descr: 'shower rain',
@@ -77,46 +67,21 @@ const weatherImagesList = {
     icon: require('../assets/weather/icons/rain.png'),
     descr: 'broken clouds',
   },
-  '10d': {
-    bg: require('../assets/weather/backgrounds/day/rain-day.jpg'),
-    icon: require('../assets/weather/icons/rain.png'),
-    descr: 'rain',
-  },
-  '10n': {
+  'rain': {
     bg: require('../assets/weather/backgrounds/night/rain-night.jpg'),
     icon: require('../assets/weather/icons/rain.png'),
     descr: 'rain',
   },
-  '11d': {
+  'rain': {
     bg: require('../assets/weather/backgrounds/thunderstorm.jpg'),
     icon: require('../assets/weather/icons/thunderstorm.png'),
     descr: 'thunderstorm',
   },
-  '11n': {
-    bg: require('../assets/weather/backgrounds/thunderstorm.jpg'),
-    icon: require('../assets/weather/icons/thunderstorm.png'),
-    descr: 'thunderstorm',
-  },
-  '13d': {
+  'snow': {
     bg: require('../assets/weather/backgrounds/day/snow-day.png'),
     icon: require('../assets/weather/icons/snow.png'),
     descr: 'snow',
   },
-  '13n': {
-    bg: require('../assets/weather/backgrounds/night/snow-night.png'),
-    icon: require('../assets/weather/icons/snow.png'),
-    descr: 'snow',
-  },
-  // '50d': {
-  //   bg: require('../assets/weather/backgrounds/mist.jpg)'),
-  //   icon: '../assets/weather/icons/mist.jpg',
-  //   descr: 'mist',
-  // },
-  // '50n': {
-  //   bg: require('../assets/weather/backgrounds/mist.jpg'),
-  //   icon: '../assets/weather/icons/mist.jpg',
-  //   descr: 'mist',
-  // },
 
 }
 
@@ -126,72 +91,37 @@ const weatherImagesList = {
 
 const makeForeCastList = (list) => {
 
-  // this array will hold an array for each day in the forecast. 
-  // 5 days right now
-  let daySeparatedList = [];
+  // Dark Sky API makes this a lot more convenient (and accurate!) than open weather map.
+  let forecastList = list.slice(1, list.length); // toss the 1st day, we have that from response.currently (see below)
 
-  // we will separate each day's info into an array. initialize 
-  // the first one here.
-  let todaysList = [];
+  let condensedList = []; // we'll make a simple array for the days forecasted
+  forecastList.forEach((day) => {
+    // get the date from the provided unix time 
+    const time = new Date(day.time * 1000);
 
-  // Ex would be "2018-09-26 03:00:00" for the first date. 
-  // This will be the first query to make the first array.
-  // We will change the filter query below as the day changes
-  // make a new array each time.
+    let year = time.getFullYear().toString().slice(0, 2);
+    let date = time.getDate();
+    let month = time.getMonth();
 
-  //console.log(list)
-  let queryStr = list[0].dt_txt.slice(0,10);
+    let hour = time.getHours(); // not using these atm
+    let minutes = time.getMinutes();
 
-  for ( let i=1; i<list.length; i++) {
-
-    let thisDateStr = list[i].dt_txt.slice(0,10);
-    //console.log(`thisDateStr: ${thisDateStr}`)
-    
-    if (thisDateStr === queryStr) {
-      //console.log("match!");
-      // add to this day's array
-      todaysList.push(list[i]);
-
-    } else {
-      // append to the master array
-      daySeparatedList.push(todaysList);
-      // start over with the new date
-      todaysList = [list[i]];
-      queryStr = list[i].dt_txt.slice(0,10);
-    }
-  }
-
-  // grab one timepoint per day for display. Using between 13 - 15 hr
-  // for afternoon timepoint. Will use all timepoints when clicking on 
-  // individual day
-  let condensedList = []
-  daySeparatedList.forEach((day) => {
-    day.forEach((obj) => {
-      
-      let time = obj.dt_txt.slice(11,13);
-      //console.log(time)
-      if (time > 12 && time < 16) {
-        // console.log('found afternoon timepoint')
-        // console.log({
-        //   desc: obj.weather[0].description,
-        //   icon: obj.weather[0].icon
-        // })
-        condensedList.push({
-          desc: obj.weather[0].description,
-          icon: obj.weather[0].icon,
-          temp: convertTemp(obj.main.temp),
-          date: obj.dt_txt.slice(5,10)
-        });
-      }
+    condensedList.push({
+      desc: day.summary,
+      icon: day.icon,
+      tempHigh: day.temperatureHigh,
+      tempLow: day.temperatureLow,
+      date: `${month + 1}-${date}` // need to correct for the api's month array
     });
+
   });
 
-  return [daySeparatedList, condensedList];
+  return condensedList;
 }
 
 
 const convertTemp = (kelvin) => {
-  var farenheit = kelvin*9/5 - 459.67;
+  var farenheit = kelvin * 9 / 5 - 459.67;
   return Math.floor(farenheit);
 }
 
@@ -220,30 +150,27 @@ export default class WeatherScreen extends Component {
     forecast: [],
     icon: '',
     background: '',
-    
   }
 
   componentDidMount() {
-    return fetch('https://lit-falls-35438.herokuapp.com/weather')
+    return fetch('https://lit-falls-35438.herokuapp.com/denver-weather')
       .then((response) => response.json())
       .then((response) => {
-        const todayWeather = response.list[0];
-        //console.log(weatherImagesList[todayWeather.weather[0].icon]);
-        
+        const todayWeather = response.data.currently;
+
         this.setState({
-          city: response.city.name,
-          country: response.city.country,
-          todayWeather: todayWeather,
-          forecast: makeForeCastList(response.list),
-          currentTemp: convertTemp(todayWeather.main.temp),
-          highTemp: todayWeather.main.temp_max,
-          lowTemp: todayWeather.main.temp_min,
-          descr: todayWeather.weather[0].description,
-          iconId: todayWeather.weather[0].icon,  
-          backgroundId: todayWeather.weather[0].icon,
-          humidity: todayWeather.main.humidity,
-          windSpeed: todayWeather.wind.speed,
-          windDir: todayWeather.wind.deg,
+          city: 'Denver',
+          currentTemp: Math.floor(todayWeather.temperature),
+          highTemp: response.data.daily.data[0].temperatureHigh, // currently doesn't have high/low
+          lowTemp: response.data.daily.data[0].temperatureLow, // '' '' 
+          descr: todayWeather.summary,
+          iconId: todayWeather.icon,
+          backgroundId: todayWeather.icon,
+          humidity: todayWeather.humidity,
+          windSpeed: todayWeather.windSpeed,
+          windDir: todayWeather.windBearing,
+          weekSummary: response.data.daily.summary,
+          forecast: makeForeCastList(response.data.daily.data),
         }, function () {
           console.log(`this.state.backgroundId: ${this.state.backgroundId}`)
         });
@@ -256,57 +183,58 @@ export default class WeatherScreen extends Component {
 
   render() {
     const resizeMode = 'cover';
-    const condensedForecast = this.state.forecast[1];
+    const condensedForecast = this.state.forecast;
     const backgroundId = this.state.backgroundId;
 
-    const weatherBG = backgroundId ? getWeatherBackground(backgroundId) : getWeatherBackground('01d');
+    const weatherBG = backgroundId ? getWeatherBackground(backgroundId) : getWeatherBackground('partly-cloudy-day');
 
     return (
 
       <View style={styles.container}>
-        
+
         <ImageBackground
           style={{ flex: 1 }}
           opacity={1}
-          imageStyle={{ resizeMode: 'cover'}}
+          imageStyle={{ resizeMode: 'cover' }}
           source={weatherBG}
         >
-        <ScrollView style={styles.container}>
-          <View style={styles.largeTextHolder}>
-            <Text style={styles.weatherCityText}>{this.state.city}, {this.state.country}</Text>
+          <ScrollView style={styles.container}>
+            <View style={styles.largeTextHolder}>
+              <Text style={styles.weatherTodayCityText}>Denver, CO</Text>
 
-            <Text style={styles.weatherTempText}>{this.state.currentTemp} &deg;F </Text>
+              <Text style={styles.weatherTodayTempText}>{this.state.currentTemp} &deg;F </Text>
 
-            <Text style={styles.weatherDescriptionText}>{this.state.descr}</Text>
-          </View>
-          
-          { condensedForecast ? 
-            condensedForecast.map( (day, i) => {
-              
-              let iconSrc = getWeatherIcon(day.icon); 
+              <Text style={styles.weatherTodayDescText}>{this.state.descr}</Text>
+            </View>
 
-              return (
-                <View key={day.date} style={styles.contentContainer}>
+            {condensedForecast ?
+              condensedForecast.map((day, i) => {
 
-                  <View style={styles.textHolder}>
-                    <Text style={styles.weatherForecastText}>{day.date}</Text>
-                    <Text style={styles.weatherForecastText}>{day.temp} &deg;F</Text>
-                    <Text style={styles.weatherForecastText}>{day.desc}</Text>
+                let iconSrc = getWeatherIcon(day.icon);
+
+                return (
+                  <View key={day.date} style={styles.contentContainer}>
+
+                    <View style={styles.textHolder}>
+                      <Text style={styles.weatherForecastText}>{day.date}</Text>
+                      <Text style={styles.weatherForecastText}>{day.desc}</Text>
+                    </View>
+                    <View style={styles.textHolder}>
+                      <Text style={styles.weatherForecastText}>{day.tempHigh} &deg;F</Text>
+                      <Text style={styles.weatherForecastText}>{day.tempLow} &deg;F</Text>
+                    </View>
+                    <Image
+                      style={styles.iconImage}
+                      source={iconSrc}
+                    ></Image>
+
                   </View>
+                )
+              })
+              : null
+            }
 
-                  <Image
-                    style={styles.iconImage}
-                    source={iconSrc}
-                    // source={iconSrc}
-                  ></Image>
 
-                </View>
-              )
-          })
-          : null
-          }
-
-          
           </ScrollView>
         </ImageBackground>
 
