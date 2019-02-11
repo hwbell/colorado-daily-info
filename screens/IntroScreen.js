@@ -11,11 +11,14 @@ import { Button, Text } from 'react-native-elements';
 
 import styles from './IntroScreen.styles';
 
+import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
+
+
 export default class WeatherScreen extends Component {
-  
+
   constructor(props) {
     super(props);
-
+    this.onSwipeLeft = this.onSwipeLeft.bind(this)
   }
   state = {
     //
@@ -25,11 +28,25 @@ export default class WeatherScreen extends Component {
 
   }
 
+  onSwipeLeft(gestureState) {
+    this.setState({ myText: 'You swiped left!' });
+  }
+
   render() {
     const { navigate } = this.props.navigation;
 
+    const config = {
+      velocityThreshold: 0.3,
+      directionalOffsetThreshold: 80
+    };
+
     return (
-      <View style={styles.container}>
+      <GestureRecognizer
+        onSwipeLeft={() => navigate('WeatherStack')}
+        config={config}
+        style={styles.container}
+      >
+
         <View>
           <Text h1 style={styles.header}>
             Welcome
@@ -71,7 +88,7 @@ export default class WeatherScreen extends Component {
           />
 
         </View>
-      </View>
+      </GestureRecognizer>
     );
   }
 }

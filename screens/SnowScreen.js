@@ -23,7 +23,8 @@ const parseResortInfo = (obj) => {
 
   const aBasinInfo = obj.aBasinWeather.aBasinToday;
   const keystoneInfo = obj.keystoneWeather.keystoneToday;
-  console.log(`aBasinInfo: ${aBasinInfo[0]}`)
+  const openSnowInfo = obj.openSnowOutlook.openSnowToday;
+  //console.log(`aBasinInfo: ${aBasinInfo[0]}`)
 
   return ({
     aBasin: {
@@ -41,6 +42,9 @@ const parseResortInfo = (obj) => {
       highTemp: keystoneInfo[2],
       lowTemp: keystoneInfo[4],
       weatherDesc: keystoneInfo[6],
+    },
+    openSnow: {
+      summary: openSnowInfo[2],
     }
   })
 }
@@ -64,6 +68,9 @@ export default class SnowScreen extends Component {
       highTemp: '',
       lowTemp: '',
       weatherDesc: '',
+    },
+    openSnow: {
+      summary: ''
     }
 
   }
@@ -84,10 +91,11 @@ export default class SnowScreen extends Component {
   }
 
   render() {
-    
+
     const resizeMode = 'cover';
     const aBasin = this.state.aBasin;
     const keystone = this.state.keystone;
+    const openSnow = this.state.openSnow;
     console.log(`aBasin.pastDaySnow:  ${this.state.aBasin}`)
     //console.log(this.state)
     return (
@@ -99,30 +107,34 @@ export default class SnowScreen extends Component {
           imageStyle={{ resizeMode }}
           source={require('../assets/images/backgrounds/snowbg.png')}
         >
-        <ScrollView style={styles.container}>
-          <View style={styles.contentContainer}>
-            <Image
-              style={styles.iconImage}
-              source={require('../assets/images/icons/abasin.png')}
-            ></Image>
-            <View style={styles.textHolder}>
-              <Text style={styles.weatherDescriptionText}>{`24 hr: ${aBasin.pastDaySnow}`}</Text>
-              <Text style={styles.weatherDescriptionText}>{`3 day: ${aBasin.threeDaySnow}`}</Text>
-              <Text style={styles.weatherDescriptionText}>{`base: ${aBasin.baseSnow}`}</Text>
+          <ScrollView style={styles.container}>
+            <View style={styles.contentContainer}>
+              <Image
+                style={styles.iconImage}
+                source={require('../assets/images/icons/abasin.png')}
+              ></Image>
+              <View style={styles.smallTextHolder}>
+                <Text style={styles.weatherDescriptionText}>{`24 hr: ${aBasin.pastDaySnow}`}</Text>
+                <Text style={styles.weatherDescriptionText}>{`3 day: ${aBasin.threeDaySnow}`}</Text>
+                <Text style={styles.weatherDescriptionText}>{`base: ${aBasin.baseSnow}`}</Text>
+              </View>
             </View>
-          </View>
 
-          <View style={styles.contentContainer}>
-            <Image
-              style={styles.iconImage}
-              source={require('../assets/images/icons/keystone.png')}
-            ></Image>
-            <View style={styles.textHolder}>
-              <Text style={styles.weatherDescriptionText}>{`${keystone.currentTemp}`}</Text>
-              <Text style={styles.weatherDescriptionText}>{`${keystone.currentDesc}`}</Text>
-              <Text style={styles.weatherDescriptionText}>{`${keystone.weatherDesc}`}</Text>
+            <View style={styles.contentContainer}>
+              <Image
+                style={styles.iconImage}
+                source={require('../assets/images/icons/keystone.png')}
+              ></Image>
+              <View style={styles.smallTextHolder}>
+                <Text style={styles.weatherDescriptionText}>{`${keystone.currentTemp}`}</Text>
+                <Text style={styles.weatherDescriptionText}>{`${keystone.currentDesc}`}</Text>
+                <Text style={styles.weatherDescriptionText}>{`${keystone.weatherDesc}`}</Text>
+              </View>
             </View>
-          </View>
+
+            <View style={styles.summaryTextHolder}>
+              <Text style={styles.weatherDescriptionText}>{`${openSnow.summary}`}</Text>
+            </View>
           </ScrollView>
         </ImageBackground>
 
