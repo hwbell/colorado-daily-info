@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform, Image } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
 
@@ -9,13 +9,40 @@ import IntroScreen from '../screens/IntroScreen';
 import WeatherScreen from '../screens/WeatherScreen';
 import SnowScreen from '../screens/SnowScreen';
 import TrafficScreen from '../screens/TrafficScreen'
-import SettingsScreen from '../screens/SettingsScreen';
+import AboutScreen from '../screens/AboutScreen';
 
 const navOps = {
   navigationOptions: {
     header: null
   },
 };
+
+const tabBarOps = {
+  activeTintColor: 'white',
+  inactiveTintColor: '#F2F3F4',
+  style: {
+    height: 50,
+    backgroundColor: 'blue',
+  },
+  indicatorStyle: {
+    backgroundColor: '#F2F3F4',
+  },
+  labelStyle: {
+    fontSize: 12,
+    fontFamily: 'Avenir-Roman',
+    fontWeight: 'bold',
+    width: 94,
+    marginTop: 4
+  },
+  tabStyle: {
+    width: 74,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: -4,
+  },
+  showIcon: true,
+}
+
 const IntroStack = createStackNavigator(
   {
     Home: IntroScreen,
@@ -26,13 +53,7 @@ const IntroStack = createStackNavigator(
 IntroStack.navigationOptions = {
   showIcon: true, 
   tabBarLabel: 'Weather',
-  tabBarOptions: {
-    activeTintColor: '#AED6F1',
-    inactiveTintColor: '#F2F3F4',
-    style: {
-      backgroundColor: 'black',
-    },
-  },
+  tabBarOptions: tabBarOps,
   tabBarIcon : () => {
     return <Image source={require('../assets/images/icons/weather.png')} style={{width:30,height:30, marginTop:5}} />
   }
@@ -48,13 +69,7 @@ const WeatherStack = createStackNavigator(
 WeatherStack.navigationOptions = {
   showIcon: true, 
   tabBarLabel: 'Weather',
-  tabBarOptions: {
-    activeTintColor: '#AED6F1',
-    inactiveTintColor: '#F2F3F4',
-    style: {
-      backgroundColor: 'black',
-    },
-  },
+  tabBarOptions: tabBarOps,
   tabBarIcon : () => {
     return <Image source={require('../assets/images/icons/weather.png')} style={{width:30,height:30, marginTop:5}} />
   }
@@ -69,13 +84,7 @@ const SnowStack = createStackNavigator(
 
 SnowStack.navigationOptions = {
   tabBarLabel: 'Ski',
-  tabBarOptions: {
-    activeTintColor: '#AED6F1',
-    inactiveTintColor: '#F2F3F4',
-    style: {
-      backgroundColor: 'black',
-    },
-  },
+  tabBarOptions: tabBarOps,
   tabBarIcon : () => {
     return <Image source={require('../assets/images/icons/snow.png')} style={{width:25,height:25, marginTop:5}} />
   }
@@ -90,35 +99,23 @@ const TrafficStack = createStackNavigator(
 
 TrafficStack.navigationOptions = {
   tabBarLabel: 'Traffic',
-  tabBarOptions: {
-    activeTintColor: '#AED6F1',
-    inactiveTintColor: '#F2F3F4',
-    style: {
-      backgroundColor: 'black',
-    },
-  },
+  tabBarOptions: tabBarOps,
   tabBarIcon : () => {
     return <Image source={require('../assets/images/icons/traffic.png')} style={{width:25,height:25, marginTop:5}} />
   }
 };
 
-const SettingsStack = createStackNavigator(
+const AboutStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    About: AboutScreen,
   },
   navOps
   );
 
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarOptions: {
-    activeTintColor: '#AED6F1',
-    inactiveTintColor: '#F2F3F4',
-    style: {
-      backgroundColor: 'black',
-    },
-  },
+AboutStack.navigationOptions = {
+  tabBarLabel: 'About',
+  tabBarOptions: tabBarOps,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -127,13 +124,21 @@ SettingsStack.navigationOptions = {
   ),
 };
 
-export default createBottomTabNavigator(
+export default createMaterialTopTabNavigator (
   {
-    IntroStack,
-    WeatherStack,
-    SnowStack,
-    TrafficStack,
-    SettingsStack,
+    Intro: IntroStack,
+    Weather: WeatherStack,
+    Snow: SnowStack,
+    Traffic: TrafficStack,
+    About: AboutStack,
   },
+  {
+    initialRouteName: 'Intro',
+    tabBarPosition: 'bottom',
+    swipeEnabled: true, 
+    animationEnabled: true,
+    lazy: false,
+    
+  }
   
 );
