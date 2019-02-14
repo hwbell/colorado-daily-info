@@ -11,9 +11,6 @@ import { Button, Text } from 'react-native-elements';
 
 import styles from './IntroScreen.styles';
 
-import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
-
-
 export default class WeatherScreen extends Component {
 
   constructor(props) {
@@ -41,11 +38,7 @@ export default class WeatherScreen extends Component {
     };
 
     return (
-      <GestureRecognizer
-        onSwipeLeft={() => navigate('WeatherStack')}
-        config={config}
-        style={styles.container}
-      >
+      <View style={styles.container}>
 
         <View>
           <Text h1 style={styles.header}>
@@ -65,30 +58,30 @@ export default class WeatherScreen extends Component {
             title="Weather"
             buttonStyle={styles.button}
             titleStyle={styles.buttonText}
-            onPress={() => navigate('WeatherStack')}
+            onPress={() => navigate('Weather')}
           />
           <Button
             title="Snow Conditions"
             buttonStyle={styles.button}
             titleStyle={styles.buttonText}
-            onPress={() => navigate('SnowStack')}
+            onPress={() => navigate('Snow')}
           />
           <Button
             title="Traffic"
             buttonStyle={styles.button}
             titleStyle={styles.buttonText}
-            onPress={() => navigate('TrafficStack')}
+            onPress={() => navigate('Traffic')}
           />
 
           <Button
             title="About this App"
             buttonStyle={styles.button}
             titleStyle={styles.buttonText}
-            onPress={() => navigate('SettingsStack')}
+            onPress={() => navigate('About')}
           />
 
         </View>
-      </GestureRecognizer>
+      </View>
     );
   }
 }

@@ -3,6 +3,7 @@ import { Platform, Image } from 'react-native';
 import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
+import { Icon } from 'react-native-elements'
 
 
 import IntroScreen from '../screens/IntroScreen';
@@ -22,13 +23,13 @@ const tabBarOps = {
   inactiveTintColor: '#F2F3F4',
   style: {
     height: 50,
-    backgroundColor: 'blue',
+    backgroundColor: 'black',
   },
   indicatorStyle: {
     backgroundColor: '#F2F3F4',
   },
   labelStyle: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Avenir-Roman',
     fontWeight: 'bold',
     width: 94,
@@ -43,19 +44,23 @@ const tabBarOps = {
   showIcon: true,
 }
 
+const iconStyle = {
+  width: 30, 
+  height: 30, 
+  marginTop: 5,
+}
+
 const IntroStack = createStackNavigator(
   {
     Home: IntroScreen,
   },
   navOps
-  );
+);
 
 IntroStack.navigationOptions = {
-  showIcon: true, 
-  tabBarLabel: 'Weather',
   tabBarOptions: tabBarOps,
-  tabBarIcon : () => {
-    return <Image source={require('../assets/images/icons/weather.png')} style={{width:30,height:30, marginTop:5}} />
+  tabBarIcon: () => {
+    return <Image source={require('../assets/tab-navigator/icons/mountains.png')} style={iconStyle} />
   }
 };
 
@@ -64,14 +69,12 @@ const WeatherStack = createStackNavigator(
     Home: WeatherScreen,
   },
   navOps
-  );
+);
 
 WeatherStack.navigationOptions = {
-  showIcon: true, 
-  tabBarLabel: 'Weather',
   tabBarOptions: tabBarOps,
-  tabBarIcon : () => {
-    return <Image source={require('../assets/images/icons/weather.png')} style={{width:30,height:30, marginTop:5}} />
+  tabBarIcon: () => {
+    return <Image source={require('../assets/tab-navigator/icons/cloud.png')} style={{ width: 30, height: 30, marginTop: 5 }} />
   }
 };
 
@@ -80,13 +83,12 @@ const SnowStack = createStackNavigator(
     Snow: SnowScreen
   },
   navOps
-  );
+);
 
 SnowStack.navigationOptions = {
-  tabBarLabel: 'Ski',
   tabBarOptions: tabBarOps,
-  tabBarIcon : () => {
-    return <Image source={require('../assets/images/icons/snow.png')} style={{width:25,height:25, marginTop:5}} />
+  tabBarIcon: () => {
+    return <Image source={require('../assets/tab-navigator/icons/skiing.png')} style={{ width: 25, height: 25, marginTop: 5 }} />
   }
 };
 
@@ -95,13 +97,12 @@ const TrafficStack = createStackNavigator(
     Snow: TrafficScreen
   },
   navOps
-  );
+);
 
 TrafficStack.navigationOptions = {
-  tabBarLabel: 'Traffic',
   tabBarOptions: tabBarOps,
-  tabBarIcon : () => {
-    return <Image source={require('../assets/images/icons/traffic.png')} style={{width:25,height:25, marginTop:5}} />
+  tabBarIcon: () => {
+    return <Image source={require('../assets/tab-navigator/icons/traffic.png')} style={{ width: 25, height: 25, marginTop: 5 }} />
   }
 };
 
@@ -110,35 +111,31 @@ const AboutStack = createStackNavigator(
     About: AboutScreen,
   },
   navOps
-  );
+);
 
 
 AboutStack.navigationOptions = {
-  tabBarLabel: 'About',
   tabBarOptions: tabBarOps,
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
-    />
-  ),
+  tabBarIcon: () => {
+    return <Image source={require('../assets/tab-navigator/icons/information.png')} style={{ width: 25, height: 25, marginTop: 5 }} />
+  }
 };
 
-export default createMaterialTopTabNavigator (
+export default createMaterialTopTabNavigator(
   {
-    Intro: IntroStack,
+    Home: IntroStack,
     Weather: WeatherStack,
-    Snow: SnowStack,
+    POW: SnowStack,
     Traffic: TrafficStack,
     About: AboutStack,
   },
   {
-    initialRouteName: 'Intro',
+    initialRouteName: 'Home',
     tabBarPosition: 'bottom',
-    swipeEnabled: true, 
+    swipeEnabled: true,
     animationEnabled: true,
     lazy: false,
-    
+
   }
-  
+
 );

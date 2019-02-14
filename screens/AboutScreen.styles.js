@@ -3,38 +3,47 @@ import { StyleSheet } from 'react-native';
 export default HomeScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    backgroundColor: '#5BA2DB'
+    backgroundColor: '#000417',
   },
-  header: {
-    paddingBottom: 30,
-    width: 200,
-    fontWeight: 'bold',
-    fontFamily: 'Avenir-Roman',
+  title: { 
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 32,
+    fontWeight: '400',
+    margin: 50,
+  },
+  subtitle: {
+    textAlign: 'left',
+    color: 'white',
+    fontSize: 24,
+    fontWeight: '400',
+    marginTop: 0,
+    marginBottom: 10,
+    marginLeft: 20
+  },
+  author: {
+    textAlign: 'left',
+    color: 'white',
+    fontSize: 20,
+    fontWeight: '400',
+    marginTop: 0,
+    marginBottom: 10,
+    marginLeft: 30
+  },
+
+  paragraph: {
+    margin: 20,
+    fontSize: 20,
+    fontWeight: '400',
     color: 'white'
   },
-  buttonContainer: {
-    paddingTop: 10,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#5BA2DB'
-  },
-
-  button: {
-    margin: 10,
-    borderColor: '#5B5BDB',
-    borderRadius: 25,
-    width: 200,
-    height: 60,
-  },
-  buttonText: {
-    fontFamily: 'Avenir-Roman',
-    fontWeight: 'bold'
+  linkText: {
+    margin: 0,
+    marginLeft: 35,
+    fontSize: 20,
+    fontWeight: '400',
+    color: '#2A46C8'
   }
-
+  
 });
 

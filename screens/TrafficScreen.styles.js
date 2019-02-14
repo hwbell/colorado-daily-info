@@ -24,7 +24,7 @@ export default HomeScreenStyles = StyleSheet.create({
     width: 350,
   },
   trafficDescriptionText: {
-    textAlign: 'center',
+    textAlign: 'left',
     marginTop: 0,
     marginBottom: 0,
     color: 'white',

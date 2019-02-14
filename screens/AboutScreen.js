@@ -5,20 +5,17 @@ import {
   ScrollView,
   Image,
   ImageBackground,
+  TouchableOpacity
 } from 'react-native';
 
 import { Button, Text } from 'react-native-elements';
 
-import styles from './IntroScreen.styles';
-
-import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
-
+import styles from './AboutScreen.styles';
 
 export default class WeatherScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.onSwipeLeft = this.onSwipeLeft.bind(this)
   }
   state = {
     //
@@ -28,67 +25,42 @@ export default class WeatherScreen extends Component {
 
   }
 
-  onSwipeLeft(gestureState) {
-    this.setState({ myText: 'You swiped left!' });
-  }
-
   render() {
     const { navigate } = this.props.navigation;
 
-    const config = {
-      velocityThreshold: 0.3,
-      directionalOffsetThreshold: 80
-    };
-
     return (
-      <GestureRecognizer
-        onSwipeRight={() => navigate('TrafficStack')}
-        config={config}
-        style={styles.container}
-      >
-
-        <View>
-          <Text h1 style={styles.header}>
-            Welcome
-          </Text>
-        </View>
-
-        <View>
-          <Text h4 style={styles.header}>
-            A Denver skier's essential info
-          </Text>
-        </View>
-
-        <View style={styles.buttonContainer}>
-
-          <Button
-            title="Weather"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonText}
-            onPress={() => navigate('WeatherStack')}
-          />
-          <Button
-            title="Snow Conditions"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonText}
-            onPress={() => navigate('SnowStack')}
-          />
-          <Button
-            title="Traffic"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonText}
-            onPress={() => navigate('TrafficStack')}
-          />
-
-          <Button
-            title="About this App"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonText}
-            onPress={() => navigate('SettingsStack')}
-          />
-
-        </View>
-      </GestureRecognizer>
+      <View style={styles.container}>
+        <Text style={styles.title}>
+          About this App
+        </Text>
+        <Text style={styles.subtitle}>
+          Colorado Daily Info
+        </Text>
+        <Text style={styles.author}>
+          built by Harry Bell
+        </Text>
+        <Text style={styles.paragraph}>
+          an app made with:
+        </Text>
+        <TouchableOpacity>
+          <Text style={styles.linkText}>React-Native</Text>
+        </TouchableOpacity>
+        <TouchableOpacity >
+          <Text style={styles.linkText}>Expo cli</Text>
+        </TouchableOpacity>
+        <TouchableOpacity >
+          <Text style={styles.linkText}>create-react-native-app</Text>
+        </TouchableOpacity>
+        <TouchableOpacity >
+          <Text style={styles.linkText}>node js</Text>
+        </TouchableOpacity>
+        <TouchableOpacity >
+          <Text style={styles.linkText}>pupeteer js</Text>
+        </TouchableOpacity>
+        <TouchableOpacity >
+          <Text style={styles.linkText}>heroku</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
 }
