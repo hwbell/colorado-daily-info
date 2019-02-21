@@ -52,7 +52,7 @@ export default class SnowScreen extends Component {
       .then((response) => {
 
         let newState = parseTrafficInfo(response);
-        console.log(`Parsed state: ${JSON.stringify(newState)}`);
+        // console.log(`Parsed state: ${JSON.stringify(newState)}`);
         this.setState(newState);
 
       })

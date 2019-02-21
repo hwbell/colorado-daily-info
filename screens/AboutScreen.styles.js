@@ -21,7 +21,7 @@ export default HomeScreenStyles = StyleSheet.create({
     marginBottom: 10,
     marginLeft: 20
   },
-  author: {
+  createdBy: {
     textAlign: 'left',
     color: 'white',
     fontSize: 20,
@@ -37,13 +37,31 @@ export default HomeScreenStyles = StyleSheet.create({
     fontWeight: '400',
     color: 'white'
   },
-  linkText: {
+  credit: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start'
+  },
+  toolLink: {
     margin: 0,
     marginLeft: 35,
     fontSize: 20,
     fontWeight: '400',
     color: '#2A46C8'
-  }
+  },
+  linkText: {
+    margin: 5,
+    fontSize: 12,
+    fontWeight: '400',
+    color: '#2A46C8'
+  },
+  authorCreditText: {
+    textAlign: 'left',
+    color: 'white',
+    fontSize: 12,
+    fontWeight: '400',
+    margin: 5,
+  },
   
 });
 

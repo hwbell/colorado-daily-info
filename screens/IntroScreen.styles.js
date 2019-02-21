@@ -7,7 +7,7 @@ export default HomeScreenStyles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: '#5BA2DB'
+    backgroundColor: 'rgba(0, 80, 255, 0.5)',
   },
   header: {
     paddingBottom: 30,
@@ -21,12 +21,12 @@ export default HomeScreenStyles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#5BA2DB'
+    // backgroundColor: 'none'
   },
 
   button: {
     margin: 10,
-    borderColor: '#5B5BDB',
+    // borderColor: '#5B5BDB',
     borderRadius: 25,
     width: 200,
     height: 60,

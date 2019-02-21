@@ -7,12 +7,13 @@ import {
   Image,
   ImageBackground,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   Button,
   StyleSheet
 } from 'react-native';
 
 import styles from './WeatherScreen.styles';
+import PoweredBy from '../components/PoweredBy';
 
 
 //const navigation = this.props.navigation;
@@ -62,14 +63,9 @@ const weatherImagesList = {
     icon: require('../assets/weather/icons/rain.png'),
     descr: 'shower rain',
   },
-  '09n': {
+  'wind': {
     bg: require('../assets/weather/backgrounds/night/rain-night.jpg'),
-    icon: require('../assets/weather/icons/rain.png'),
-    descr: 'broken clouds',
-  },
-  'rain': {
-    bg: require('../assets/weather/backgrounds/night/rain-night.jpg'),
-    icon: require('../assets/weather/icons/rain.png'),
+    icon: require('../assets/weather/icons/wind.png'),
     descr: 'rain',
   },
   'rain': {
@@ -126,16 +122,21 @@ const convertTemp = (kelvin) => {
 }
 
 const getWeatherBackground = (id) => {
-  console.log(id);
+  // console.log(id);
   return weatherImagesList[id].bg;
 }
 
 const getWeatherIcon = (id) => {
-  console.log(id);
+  // console.log(id);
   return weatherImagesList[id].icon;
 }
 
 export default class WeatherScreen extends Component {
+
+  constructor(props) {
+    super(props);
+    this.getCityWeather = this.getCityWeather.bind(this);
+  }
   state = {
     city: '',
     country: '',
@@ -153,13 +154,18 @@ export default class WeatherScreen extends Component {
   }
 
   componentDidMount() {
-    return fetch('https://lit-falls-35438.herokuapp.com/denver-weather')
+    this.getCityWeather('Denver');
+  }
+
+  getCityWeather(city) {
+    let cityToFetch = city.toLowerCase();
+    return fetch(`https://lit-falls-35438.herokuapp.com/${cityToFetch}-weather`)
       .then((response) => response.json())
       .then((response) => {
         const todayWeather = response.data.currently;
 
         this.setState({
-          city: 'Denver',
+          city: `${city}`,
           currentTemp: Math.floor(todayWeather.temperature),
           highTemp: response.data.daily.data[0].temperatureHigh, // currently doesn't have high/low
           lowTemp: response.data.daily.data[0].temperatureLow, // '' '' 
@@ -172,7 +178,7 @@ export default class WeatherScreen extends Component {
           weekSummary: response.data.daily.summary,
           forecast: makeForeCastList(response.data.daily.data),
         }, function () {
-          console.log(`this.state.backgroundId: ${this.state.backgroundId}`)
+          // console.log(`this.state.backgroundId: ${this.state.backgroundId}`)
         });
 
       })
@@ -198,14 +204,38 @@ export default class WeatherScreen extends Component {
           imageStyle={{ resizeMode: 'cover' }}
           source={weatherBG}
         >
-          <ScrollView style={styles.container}>
-            <View style={styles.largeTextHolder}>
-              <Text style={styles.weatherTodayCityText}>Denver, CO</Text>
 
-              <Text style={styles.weatherTodayTempText}>{this.state.currentTemp} &deg;F </Text>
+          <View style={styles.largeTextHolder}>
+            <Text style={styles.weatherTodayCityText}>{this.state.city}, CO</Text>
 
-              <Text style={styles.weatherTodayDescText}>{this.state.descr}</Text>
+            <Text style={styles.weatherTodayTempText}>{this.state.currentTemp} &deg;F </Text>
+
+            <Text style={styles.weatherTodayDescText}>{this.state.descr}</Text>
+          </View>
+
+          <View style={styles.topIconHolder}>
+
+            <View >
+              <TouchableOpacity onPress={() => { this.getCityWeather('Denver') }}>
+                <Image
+                  style={styles.topIconImage}
+                  source={require('../assets/images/icons/skyline.png')}
+                ></Image>
+              </TouchableOpacity>
             </View>
+
+            <View >
+              <TouchableOpacity onPress={() => { this.getCityWeather('Silverthorne') }}>
+                <Image
+                  style={styles.topIconImage}
+                  source={require('../assets/tab-navigator/icons/mountains.png')}
+                ></Image>
+              </TouchableOpacity>
+            </View>
+
+          </View>
+
+          <ScrollView style={styles.container}>
 
             {condensedForecast ?
               condensedForecast.map((day, i) => {
@@ -213,20 +243,22 @@ export default class WeatherScreen extends Component {
                 let iconSrc = getWeatherIcon(day.icon);
 
                 return (
-                  <View key={day.date} style={styles.contentContainer}>
+                  <View key={i} style={styles.contentContainer}>
 
                     <View style={styles.textHolder}>
-                      <Text style={styles.weatherForecastText}>{day.date}</Text>
-                      <Text style={styles.weatherForecastText}>{day.desc}</Text>
+                      <Text style={styles.weatherForecastDescText}>{day.date}</Text>
+                      <Text style={styles.weatherForecastDescText}>{day.desc}</Text>
                     </View>
                     <View style={styles.textHolder}>
-                      <Text style={styles.weatherForecastText}>{day.tempHigh} &deg;F</Text>
-                      <Text style={styles.weatherForecastText}>{day.tempLow} &deg;F</Text>
+                      <Text style={styles.weatherForecastTempText}>{day.tempHigh} &deg;F</Text>
+                      <Text style={styles.weatherForecastTempText}>{day.tempLow} &deg;F</Text>
                     </View>
-                    <Image
-                      style={styles.iconImage}
-                      source={iconSrc}
-                    ></Image>
+                    <View style={styles.iconHolder}>
+                      <Image
+                        style={styles.iconImage}
+                        source={iconSrc}
+                      ></Image>
+                    </View>
 
                   </View>
                 )
@@ -234,7 +266,10 @@ export default class WeatherScreen extends Component {
               : null
             }
 
-
+            <PoweredBy 
+              source={'https://darksky.net/dev'}
+              name={' darksky.net'}
+            />
           </ScrollView>
         </ImageBackground>
 

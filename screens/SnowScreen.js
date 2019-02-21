@@ -11,6 +11,8 @@ import {
   Button
 } from 'react-native';
 
+import PoweredBy from '../components/PoweredBy';
+
 import styles from './SnowScreen.styles';
 
 //const navigation = this.props.navigation;
@@ -19,6 +21,7 @@ const text = {
   'header': 'Weather'
 }
 
+// get the data into simple pieces from the fetched JSON
 const parseResortInfo = (obj) => {
 
   const aBasinInfo = obj.aBasinWeather.aBasinToday;
@@ -32,16 +35,17 @@ const parseResortInfo = (obj) => {
       threeDaySnow: aBasinInfo[2],
       baseSnow: aBasinInfo[4],
       snowConditions: aBasinInfo[6],
-      todayTemp: aBasinInfo[10],
-      tomorrowTemp: aBasinInfo[14],
-      twoDayTemp: aBasinInfo[18],
+      // todayTemp: aBasinInfo[10],
+      // todayWeather: aBasinInfo[11],
+      // tomorrowTemp: aBasinInfo[14],
+      // tomorrowWeather: aBasinInfo[15],
     },
     keystone: {
-      currentTemp: keystoneInfo[0],
-      currentDesc: keystoneInfo[1],
-      highTemp: keystoneInfo[2],
-      lowTemp: keystoneInfo[4],
-      weatherDesc: keystoneInfo[6],
+      pastDaySnow: keystoneInfo[5],
+      twoDaySnow: keystoneInfo[8],
+      sevenDaySnow: keystoneInfo[11],
+      baseSnow: keystoneInfo[14],
+      snowConditions: keystoneInfo[0],
     },
     openSnow: {
       summary: openSnowInfo[2],
@@ -81,7 +85,7 @@ export default class SnowScreen extends Component {
       .then((response) => {
 
         let newState = parseResortInfo(response);
-        console.log(`Parsed state: ${JSON.stringify(newState)}`);
+        // console.log(`Parsed state: ${JSON.stringify(newState)}`);
         this.setState(newState);
 
       })
@@ -108,33 +112,56 @@ export default class SnowScreen extends Component {
           source={require('../assets/images/backgrounds/snowbg.png')}
         >
           <ScrollView style={styles.container}>
-            <View style={styles.contentContainer}>
-              <Image
-                style={styles.iconImage}
-                source={require('../assets/images/icons/abasin.png')}
-              ></Image>
-              <View style={styles.smallTextHolder}>
-                <Text style={styles.weatherDescriptionText}>{`24 hr: ${aBasin.pastDaySnow}`}</Text>
-                <Text style={styles.weatherDescriptionText}>{`3 day: ${aBasin.threeDaySnow}`}</Text>
-                <Text style={styles.weatherDescriptionText}>{`base: ${aBasin.baseSnow}`}</Text>
-              </View>
-            </View>
 
-            <View style={styles.contentContainer}>
-              <Image
-                style={styles.iconImage}
-                source={require('../assets/images/icons/keystone.png')}
-              ></Image>
-              <View style={styles.smallTextHolder}>
-                <Text style={styles.weatherDescriptionText}>{`${keystone.currentTemp}`}</Text>
-                <Text style={styles.weatherDescriptionText}>{`${keystone.currentDesc}`}</Text>
-                <Text style={styles.weatherDescriptionText}>{`${keystone.weatherDesc}`}</Text>
+
+            <View style={styles.topInfoHolder}>
+              <View style={styles.contentContainer}>
+                <Image
+                  style={styles.iconImage}
+                  source={require('../assets/images/icons/abasin.png')}
+                ></Image>
+                <View style={styles.smallTextHolder}>
+                  <Text style={styles.weatherDescriptionText}>{`${aBasin.snowConditions}`}</Text>
+                  <Text style={styles.weatherDescriptionText}>{`base: ${aBasin.baseSnow}`}</Text>
+                  <Text style={styles.weatherDescriptionText}>{`24 hr: ${aBasin.pastDaySnow}`}</Text>
+                  <Text style={styles.weatherDescriptionText}>{`72: ${aBasin.threeDaySnow}`}</Text>
+
+                </View>
+              </View>
+
+              <View style={styles.contentContainer}>
+                <Image
+                  style={styles.iconImage}
+                  source={require('../assets/images/icons/keystone.png')}
+                ></Image>
+                <View style={styles.smallTextHolder}>
+                  <Text style={styles.weatherDescriptionText}>{`${keystone.snowConditions}`}</Text>
+                  <Text style={styles.weatherDescriptionText}>{`base: ${keystone.baseSnow}`}</Text>
+                  <Text style={styles.weatherDescriptionText}>{`24 hr: ${keystone.pastDaySnow}`}</Text>
+                  <Text style={styles.weatherDescriptionText}>{`48 hr: ${keystone.twoDaySnow}`}</Text>
+                  <Text style={styles.weatherDescriptionText}>{`7 days: ${keystone.sevenDaySnow}`}</Text>
+                </View>
               </View>
             </View>
 
             <View style={styles.summaryTextHolder}>
               <Text style={styles.weatherDescriptionText}>{`${openSnow.summary}`}</Text>
             </View>
+
+            <PoweredBy
+              source={'https://www.arapahoebasin.com/'}
+              name={' Arapahoe Basin'}
+            />
+
+            <PoweredBy
+              source={'https://www.keystoneresort.com/'}
+              name={' Keystone Resort'}
+            />
+
+            <PoweredBy
+              source={'https://opensnow.com/'}
+              name={' Open Snow'}
+            />
           </ScrollView>
         </ImageBackground>
 

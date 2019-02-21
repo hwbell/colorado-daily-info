@@ -3,63 +3,84 @@ import { StyleSheet } from 'react-native';
 export default HomeScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
+    // flexDirection: 'column',
+    // justifyContent: 'flex-start',
+   // alignItems: 'center',
+    backgroundColor: 'rgba(0, 80, 255, 0.5)',
   },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
+  largeTextHolder: {
+    backgroundColor: 'rgba(0, 80, 255, 0.5)',
+  },  
   contentContainer: {
-    paddingTop: 30,
+    paddingTop: 10,
     flex: 1, 
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(52, 52, 52, 0.2)',
   },
+  topIconHolder: {
+    backgroundColor: 'rgba(0, 80, 255, 0.5)',
+    width: '100%',
+    paddingTop: 20,
+    paddingBottom: 20,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    
+    // margin: 30
+  },
+  topIconImage: {
+    width: 65,
+    height: 65
+  },
+  
   textHolder: {
     paddingTop: 25,
-    paddingLeft: 30,
-    width: 150,
+    paddingLeft: 20,
+    width: '40%',
   },
-  largeTextHolder: {
-    backgroundColor: 'rgba(52, 52, 52, 0.2)',
+
+  iconHolder: {
+    width: '20%',
   },
   iconImage: {
     borderRadius: 10,
     marginRight: 20,
     marginTop: 18,
-    width: 40, 
-    height: 40,
-
+    width: 45,
+    height: 45
   },
   weatherTodayCityText: {
     textAlign: 'center',
     color: 'white',
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: '400',
-    marginTop: 60,
+    marginTop: 30,
     marginBottom: 10,
   },
   weatherTodayDescText: {
     textAlign: 'center',
     color: 'white',
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: '400',
   },
   weatherTodayTempText: {
     textAlign: 'center',
     color: 'white',
-    fontSize: 45,
+    fontSize: 42,
     fontWeight: 'bold',
     fontFamily: 'Avenir-Roman',
   },
   
-  weatherForecastText: {
+  weatherForecastDescText: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 14,
+    fontFamily: 'Avenir-Roman',
+    fontWeight: 'bold'
+  },
+  weatherForecastTempText: {
+    color: 'white',
+    fontSize: 18,
     fontFamily: 'Avenir-Roman',
     fontWeight: 'bold'
   }

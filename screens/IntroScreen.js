@@ -15,7 +15,6 @@ export default class WeatherScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.onSwipeLeft = this.onSwipeLeft.bind(this)
   }
   state = {
     //
@@ -25,17 +24,8 @@ export default class WeatherScreen extends Component {
 
   }
 
-  onSwipeLeft(gestureState) {
-    this.setState({ myText: 'You swiped left!' });
-  }
-
   render() {
     const { navigate } = this.props.navigation;
-
-    const config = {
-      velocityThreshold: 0.3,
-      directionalOffsetThreshold: 80
-    };
 
     return (
       <View style={styles.container}>

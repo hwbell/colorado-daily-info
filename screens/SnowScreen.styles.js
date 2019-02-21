@@ -3,10 +3,13 @@ import { StyleSheet } from 'react-native';
 export default HomeScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgba(52, 52, 52, 0.2)',
+    backgroundColor: 'rgba(0, 80, 255, 0.5)',
   },
+  topInfoHolder: {
+    marginTop: 30
+  },  
+
   contentContainer: {
-    paddingTop: 30,
     flex: 0, 
     flexDirection: 'row',
     justifyContent: 'center',
