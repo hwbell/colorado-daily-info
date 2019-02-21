@@ -11,6 +11,7 @@ import {
   Button
 } from 'react-native';
 
+import PoweredBy from '../components/PoweredBy';
 import styles from './TrafficScreen.styles';
 
 //const navigation = this.props.navigation;
@@ -22,13 +23,13 @@ const text = {
 const parseTrafficInfo = (obj) => {
   // get the weekend traffic forecast. 
   const weekendTrafficInfo = obj.traffic.weekendTraffic;
-  
+
   // we can just get the portion
   // of an array withing the object, which starts with 'TRAVEL FORECAST & TIPS'.
   // Just get the portion between 'WEEKEND TRAVEL FORECAST' and 'Have a great weekend!'.
   let start = weekendTrafficInfo.indexOf('WEEKEND TRAVEL FORECAST');
   let end = weekendTrafficInfo.indexOf('TIPS FOR I-70 MOUNTAIN TRAVEL');
-  let weekendDisplayData = weekendTrafficInfo.slice(start, end-1);
+  let weekendDisplayData = weekendTrafficInfo.slice(start, end - 1);
 
   return ({
     traffic: {
@@ -65,9 +66,9 @@ export default class SnowScreen extends Component {
 
     const resizeMode = 'cover';
     const traffic = this.state.traffic;
-    
+
     return (
-      
+
       <View style={styles.container}>
         <ImageBackground
           style={{ flex: 1 }}
@@ -76,20 +77,27 @@ export default class SnowScreen extends Component {
           source={require('../assets/traffic/backgrounds/traffic.png')}
         >
           <ScrollView style={styles.container}>
-          <View style={styles.contentContainer}>
-            {/* <Image
+            <View style={styles.contentContainer}>
+              {/* <Image
               style={styles.iconImage}
               source={require('../assets/images/traffic.png')}
             ></Image> */}
-            <View style={styles.textHolder}>
-              {traffic.weekend.map( (p, i) => {
-                return (
-                  <Text key={i} style={styles.trafficDescriptionText}>{p}</Text>
-                )
-              })}
+              <View style={styles.textHolder}>
+                {traffic.weekend.map((p, i) => {
+                  return (
+                    <Text key={i} style={styles.trafficDescriptionText}>{p}</Text>
+                  )
+                })}
+              </View>
             </View>
-          </View>
+          
+            <PoweredBy
+              source={'https://www.goi70.com'}
+              name={' GO-I70'}
+            />    
+          
           </ScrollView>
+          
         </ImageBackground>
 
       </View>

@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
   link: {
     fontSize: 16,
-    color: '#D500FF',
-    fontWeight: '400',
+    color: '#4D0B98',
+    fontWeight: '700',
   }
 });

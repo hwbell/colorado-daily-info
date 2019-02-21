@@ -268,7 +268,7 @@ export default class WeatherScreen extends Component {
 
             <PoweredBy 
               source={'https://darksky.net/dev'}
-              name={' darksky.net'}
+              name={' DarkSky API'}
             />
           </ScrollView>
         </ImageBackground>
