@@ -219,7 +219,7 @@ export default class WeatherScreen extends Component {
               <TouchableOpacity onPress={() => { this.getCityWeather('Denver') }}>
                 <Image
                   style={styles.topIconImage}
-                  source={require('../assets/images/icons/skyline.png')}
+                  source={require('../assets/weather/icons/skyline.png')}
                 ></Image>
               </TouchableOpacity>
             </View>

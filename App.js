@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Image, Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Animated, Image, Platform, StatusBar, StyleSheet, View, ActivityIndicator } from 'react-native';
 import { AppLoading, Asset, Font, Icon, SplashScreen } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 
@@ -28,6 +28,7 @@ export default class App extends React.Component {
   };
 
   render() {
+
     if (!this.state.isLoadingComplete) {
       return <View />;
     }
@@ -41,57 +42,121 @@ export default class App extends React.Component {
     );
   }
 
+  getAnimatedContainerStyle = () => {
+    return {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'rgba(0, 80, 255, 0.75)',
+      opacity: this.state.splashAnimation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [1, 0],
+      }),
+    }
+  }
+
+  getAnimatedViewStyle = () => {
+    return {
+      // position: 'absolute',
+      // top: 0,
+      // left: 0,
+      // bottom: 0,
+      // right: 0,
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      // backgroundColor: 'rgba(0, 80, 255, 0.5)',
+      opacity: this.state.splashAnimation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [1, 0],
+      }),
+    }
+  }
+
   _maybeRenderLoadingImage = () => {
+
+    const animatedImageStyle = {
+      width: 50,
+      height: 50,
+      margin: 10,
+      // position: 'absolute',
+      // top: 0,
+      // left: 0,
+      // bottom: 0,
+      // right: 0,
+      resizeMode: 'contain',
+      transform: [
+        {
+          scale: this.state.splashAnimation.interpolate({
+            inputRange: [0, 1],
+            outputRange: [1, 4],
+          }),
+        },
+      ],
+    }
+
+    const animatedTextStyle = {
+      color: 'whitesmoke',
+      fontFamily: 'Avenir-Roman',
+      fontWeight: 'bold'
+    }
+
     if (this.state.splashAnimationComplete) {
       return null;
     }
 
     return (
       <Animated.View
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: '#fff',
-          opacity: this.state.splashAnimation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [1, 0],
-          }),
-        }}>
-        <Animated.Image
-          source={require('./assets/images/skiing-intro.gif')}
-          style={{
-            width: undefined,
-            height: undefined,
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-            resizeMode: 'contain',
-            transform: [
-              {
-                scale: this.state.splashAnimation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [1, 4],
-                }),
-              },
-            ],
-          }}
-          onLoadEnd={this._animateOut}
-        />
+        style={this.getAnimatedContainerStyle()}>
+        <Animated.View
+          style={this.getAnimatedViewStyle()}>
+          <Animated.Image
+            source={require('./assets/weather/icons/skyline.png')}
+            style={animatedImageStyle}
+            onLoadEnd={this._animateOut}
+          />
+
+          <Animated.Image
+            source={require('./assets/tab-navigator/icons/mountains.png')}
+            style={animatedImageStyle}
+          // onLoadEnd={this._animateOut}
+          />
+
+          <Animated.Image
+            source={require('./assets/tab-navigator/icons/cloud.png')}
+            style={animatedImageStyle}
+          // onLoadEnd={this._animateOut}
+          />
+          <Animated.Image
+            source={require('./assets/tab-navigator/icons/skiing.png')}
+            style={animatedImageStyle}
+          // onLoadEnd={this._animateOut}
+          />
+        </Animated.View>
+        <Animated.View
+          style={this.getAnimatedViewStyle()}>
+          <Animated.Text style={animatedTextStyle}>
+            loading resources ...
+          </Animated.Text>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </Animated.View>
+
+
       </Animated.View>
     );
   };
 
   _animateOut = async () => {
     SplashScreen.hide();
-    await this.timeout(5000);
-    
+    await this.timeout(3000);
+
     Animated.timing(this.state.splashAnimation, {
       toValue: 1,
       duration: 700,
@@ -102,7 +167,7 @@ export default class App extends React.Component {
   };
 
   _loadResourcesAsync = async () => {
-    
+
     return Promise.all([
       Asset.loadAsync([
         require('./assets/images/robot-dev.png'),
@@ -118,7 +183,7 @@ export default class App extends React.Component {
       }),
     ]);
   };
-  
+
   timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
