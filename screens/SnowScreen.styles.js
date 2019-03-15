@@ -10,10 +10,10 @@ export default HomeScreenStyles = StyleSheet.create({
   },  
 
   contentContainer: {
-    flex: 0, 
+    // flex: 0, 
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   iconImage: {
     borderRadius: 10,
@@ -24,20 +24,33 @@ export default HomeScreenStyles = StyleSheet.create({
   },
   smallTextHolder: {
     marginTop: 18,
-    width: 250
-  },
-  summaryTextHolder: {
-    margin: 18,
     // width: 250
   },
-  weatherDescriptionText: {
+  summaryTextHolder: {
+    justifyContent: 'center',
+    margin: 18,
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    // borderColor: 'rgba(245, 245, 245, 0.4)',
+    // borderWidth: 0.4,
+    borderRadius: 20,
+  },
+  numbersText: {
     textAlign: 'left',
     marginTop: 0,
     marginBottom: 0,
     color: 'white',
     fontSize: 20,
-    fontFamily: 'Avenir-Roman',
-    fontWeight: 'bold'
+    fontFamily: 'Cabin',
+  },
+  descriptionText: {
+    padding: 10,
+    // paddingLeft: 20,
+    textAlign: 'left',
+    marginTop: 0,
+    marginBottom: 0,
+    color: 'white',
+    fontSize: 20,
+    fontFamily: 'Cabin',
   },
   
 });

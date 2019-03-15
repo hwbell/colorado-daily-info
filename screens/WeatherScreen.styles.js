@@ -12,11 +12,15 @@ export default HomeScreenStyles = StyleSheet.create({
     backgroundColor: 'rgba(0, 80, 255, 0.5)',
   },  
   contentContainer: {
-    paddingTop: 10,
+    padding: 10,
     flex: 1, 
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    borderColor: 'rgba(245, 245, 245, 0.4)',
+    borderWidth: 0.5,
+    // borderRadius: 20,
   },
   topIconHolder: {
     backgroundColor: 'rgba(0, 80, 255, 0.5)',
@@ -35,7 +39,7 @@ export default HomeScreenStyles = StyleSheet.create({
   },
   
   textHolder: {
-    paddingTop: 25,
+    // paddingTop: 10,
     paddingLeft: 20,
     width: '40%',
   },
@@ -46,7 +50,7 @@ export default HomeScreenStyles = StyleSheet.create({
   iconImage: {
     borderRadius: 10,
     marginRight: 20,
-    marginTop: 18,
+    // marginTop: 8,
     width: 45,
     height: 45
   },
@@ -68,20 +72,26 @@ export default HomeScreenStyles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     fontSize: 42,
-    fontWeight: 'bold',
-    fontFamily: 'Avenir-Roman',
+    fontFamily: 'Cabin-Bold',
   },
   
+  weatherSelector: {
+    backgroundColor: 'rgba(41, 182, 246, 0.5)',
+    borderColor: 'rgba(245, 245, 245, 0.4)',
+    borderWidth: 0.4,
+    borderRadius: 20,
+  },  
+
   weatherForecastDescText: {
     color: 'white',
     fontSize: 14,
-    fontFamily: 'Avenir-Roman',
+    fontFamily: 'Cabin',
     fontWeight: 'bold'
   },
   weatherForecastTempText: {
     color: 'white',
     fontSize: 18,
-    fontFamily: 'Avenir-Roman',
+    fontFamily: 'Cabin',
     fontWeight: 'bold'
   }
 });

@@ -109,7 +109,7 @@ export default class SnowScreen extends Component {
           style={{ flex: 1 }}
           opacity={1}
           imageStyle={{ resizeMode }}
-          source={require('../assets/images/backgrounds/snowbg.png')}
+          source={require('../assets/images/backgrounds/snowbg2.jpg')}
         >
           <ScrollView style={styles.container}>
 
@@ -121,10 +121,10 @@ export default class SnowScreen extends Component {
                   source={require('../assets/images/icons/abasin.png')}
                 ></Image>
                 <View style={styles.smallTextHolder}>
-                  <Text style={styles.weatherDescriptionText}>{`${aBasin.snowConditions}`}</Text>
-                  <Text style={styles.weatherDescriptionText}>{`base: ${aBasin.baseSnow}`}</Text>
-                  <Text style={styles.weatherDescriptionText}>{`24 hr: ${aBasin.pastDaySnow}`}</Text>
-                  <Text style={styles.weatherDescriptionText}>{`72: ${aBasin.threeDaySnow}`}</Text>
+                  <Text style={styles.numbersText}>{`${aBasin.snowConditions}`}</Text>
+                  <Text style={styles.numbersText}>{`base: ${aBasin.baseSnow}`}</Text>
+                  <Text style={styles.numbersText}>{`24 hr: ${aBasin.pastDaySnow}`}</Text>
+                  <Text style={styles.numbersText}>{`72: ${aBasin.threeDaySnow}`}</Text>
 
                 </View>
               </View>
@@ -135,33 +135,24 @@ export default class SnowScreen extends Component {
                   source={require('../assets/images/icons/keystone.png')}
                 ></Image>
                 <View style={styles.smallTextHolder}>
-                  <Text style={styles.weatherDescriptionText}>{`${keystone.snowConditions}`}</Text>
-                  <Text style={styles.weatherDescriptionText}>{`base: ${keystone.baseSnow}`}</Text>
-                  <Text style={styles.weatherDescriptionText}>{`24 hr: ${keystone.pastDaySnow}`}</Text>
-                  <Text style={styles.weatherDescriptionText}>{`48 hr: ${keystone.twoDaySnow}`}</Text>
-                  <Text style={styles.weatherDescriptionText}>{`7 days: ${keystone.sevenDaySnow}`}</Text>
+                  <Text style={styles.numbersText}>{`${keystone.snowConditions}`}</Text>
+                  <Text style={styles.numbersText}>{`base: ${keystone.baseSnow}`}</Text>
+                  <Text style={styles.numbersText}>{`24 hr: ${keystone.pastDaySnow}`}</Text>
+                  <Text style={styles.numbersText}>{`48 hr: ${keystone.twoDaySnow}`}</Text>
+                  <Text style={styles.numbersText}>{`7 days: ${keystone.sevenDaySnow}`}</Text>
                 </View>
               </View>
             </View>
 
             <View style={styles.summaryTextHolder}>
-              <Text style={styles.weatherDescriptionText}>{`${openSnow.summary}`}</Text>
+              <Text style={styles.descriptionText}>{`${openSnow.summary}`}</Text>
             </View>
 
             <PoweredBy
-              source={'https://www.arapahoebasin.com/'}
-              name={' Arapahoe Basin'}
+              source={['https://www.arapahoebasin.com/','https://www.keystoneresort.com/', 'https://opensnow.com/']}
+              name={['A-Basin', 'Keystone', 'Open Snow']}
             />
 
-            <PoweredBy
-              source={'https://www.keystoneresort.com/'}
-              name={' Keystone Resort'}
-            />
-
-            <PoweredBy
-              source={'https://opensnow.com/'}
-              name={' Open Snow'}
-            />
           </ScrollView>
         </ImageBackground>
 

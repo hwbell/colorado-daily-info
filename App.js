@@ -169,12 +169,26 @@ export default class App extends React.Component {
   _loadResourcesAsync = async () => {
 
     return Promise.all([
+      // make a fe
+      fetch(`https://lit-falls-35438.herokuapp.com/Denver-weather`)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      }),
       Asset.loadAsync([
         require('./assets/images/robot-dev.png'),
         require('./assets/images/robot-prod.png'),
         require('./assets/images/splash.png'),
       ]),
       Font.loadAsync({
+        'Cabin': require('./assets/fonts/Cabin/Cabin-Regular.ttf'),
+        'Cabin-Bold': require('./assets/fonts/Cabin/Cabin-Bold.ttf'),
+        'OpenSans': require('./assets/fonts/OpenSans/OpenSans-Regular.ttf'),
+        'OpenSans-Bold': require('./assets/fonts/OpenSans/OpenSans-Bold.ttf'),
+
         // This is the font that we are using for our tab bar
         ...Icon.Ionicons.font,
         // We include SpaceMono because we use it in HomeScreen.js. Feel free

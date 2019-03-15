@@ -6,10 +6,14 @@ export default HomeScreenStyles = StyleSheet.create({
     backgroundColor: 'rgba(0, 80, 255, 0.5)',
   },
   contentContainer: {
-    paddingTop: 30,
+    marginTop: 30,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'flex-start',
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    // borderColor: 'rgba(245, 245, 245, 0.4)',
+    // borderWidth: 0.5,
+    borderRadius: 15,
   },
   iconImage: {
     borderRadius: 10,
@@ -29,8 +33,7 @@ export default HomeScreenStyles = StyleSheet.create({
     marginBottom: 0,
     color: 'white',
     fontSize: 20,
-    fontFamily: 'Avenir-Roman',
-    fontWeight: 'bold'
+    fontFamily: 'Cabin',
   },
   
   

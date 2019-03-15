@@ -3,37 +3,55 @@ import { StyleSheet } from 'react-native';
 export default HomeScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    backgroundColor: 'rgba(0, 80, 255, 0.5)',
-  },
-  header: {
-    paddingBottom: 30,
-    width: 200,
-    fontWeight: 'bold',
-    fontFamily: 'Avenir-Roman',
-    color: 'white'
-  },
-  buttonContainer: {
-    paddingTop: 10,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: 'none'
+    backgroundColor: 'rgba(0, 80, 255, 0.5)',
+  },
+  title: {
+    fontSize: 28,
+    fontFamily: 'OpenSans',
+    color: 'white',
+    marginTop: 50
+  },
+  subtitle: {
+    fontSize: 22,
+    fontFamily: 'Cabin',
+    color: 'white',
+    margin: 30
+  },
+  buttonContainer: {
+    paddingTop: 10,
+    flex: 1,
+    // flexDirection: 'column',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    
   },
 
-  button: {
-    margin: 10,
-    // borderColor: '#5B5BDB',
-    borderRadius: 25,
-    width: 200,
-    height: 60,
+  inputsContainer: {
+    // borderColor: 'white',
+    
+    flex: 1,
+    flexDirection: 'row',
+    margin: 0
   },
-  buttonText: {
-    fontFamily: 'Avenir-Roman',
-    fontWeight: 'bold'
+  fullWidthButton: {
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(245, 245, 245, 0.4)',
+    borderWidth: 0.4,
+    borderRadius: 20,
+    height: '90%',
+    width: '100%',
+    margin: 0
+  },
+  fullWidthButtonText: {
+    fontSize: 20,
+    padding: 28,
+    fontFamily: 'Cabin',
+    color: 'white',
+    textAlign: 'center',
+
   }
 
 });

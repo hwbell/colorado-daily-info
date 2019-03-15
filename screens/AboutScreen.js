@@ -20,7 +20,7 @@ const tools = ['React Native', 'Expo CLI', 'create-react-native-app', 'Node.js',
 
 const toolsDisplay = tools.map((tool, i) => {
   return (
-    <TouchableOpacity key={i}>
+    <TouchableOpacity style={styles.tool} key={i}>
       <Text style={styles.toolLink}>{tool}</Text>
     </TouchableOpacity>
   )
@@ -50,27 +50,44 @@ export default class AboutScreen extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    const resizeMode = 'cover';
 
     return (
-      <ScrollView style={styles.container}>
-        <Text style={styles.title}>
-          About this App
-        </Text>
-        <Text style={styles.subtitle}>
-          Colorado Daily Info
-        </Text>
-        <Text style={styles.createdBy}>
-          built by Harry Bell
-        </Text>
-        <Text style={styles.paragraph}>
-          an app made with:
-        </Text>
-        
-        {toolsDisplay}
 
-        <Credits/>
+      <View style={styles.container}>
 
-      </ScrollView>
+        <ImageBackground
+          style={{ flex: 1 }}
+          opacity={1}
+          imageStyle={{ resizeMode }}
+          source={require('../assets/weather/backgrounds/night/clear-night-home.png')}
+        >
+        <ScrollView style={styles.container}>
+
+          <View style={styles.contentContainer}>
+            <Text style={styles.title}>
+              About this App
+          </Text>
+            <Text style={styles.subtitle}>
+              Colorado Daily Info
+          </Text>
+            <Text style={styles.createdBy}>
+              built by Harry Bell
+          </Text>
+            <Text style={styles.paragraph}>
+              an app made with:
+          </Text>
+
+            {toolsDisplay}
+
+            <Credits />
+          </View>
+
+        </ScrollView>
+
+        </ImageBackground>
+
+      </View>
     );
   }
 }

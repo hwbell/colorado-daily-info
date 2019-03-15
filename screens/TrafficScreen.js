@@ -92,8 +92,8 @@ export default class SnowScreen extends Component {
             </View>
           
             <PoweredBy
-              source={'https://www.goi70.com'}
-              name={' GO-I70'}
+              source={['https://www.goi70.com']}
+              name={[' GO-I70']}
             />    
           
           </ScrollView>

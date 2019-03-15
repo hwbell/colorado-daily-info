@@ -542,7 +542,7 @@ export default class Credits extends Component {
   render() {
 
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.creditsContainer}>
 
         <TouchableOpacity
           onPress={() => this.handleLink("http://creativecommons.org/licenses/by/3.0/")}>

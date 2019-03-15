@@ -215,8 +215,8 @@ export default class WeatherScreen extends Component {
 
           <View style={styles.topIconHolder}>
 
-            <View >
-              <TouchableOpacity onPress={() => { this.getCityWeather('Denver') }}>
+            <View style={styles.weatherSelector}>
+              <TouchableOpacity style={{padding: 10}} onPress={() => { this.getCityWeather('Denver') }}>
                 <Image
                   style={styles.topIconImage}
                   source={require('../assets/weather/icons/skyline.png')}
@@ -224,8 +224,8 @@ export default class WeatherScreen extends Component {
               </TouchableOpacity>
             </View>
 
-            <View >
-              <TouchableOpacity onPress={() => { this.getCityWeather('Silverthorne') }}>
+            <View style={styles.weatherSelector}>
+              <TouchableOpacity style={{padding: 10}} onPress={() => { this.getCityWeather('Silverthorne') }}>
                 <Image
                   style={styles.topIconImage}
                   source={require('../assets/tab-navigator/icons/mountains.png')}
@@ -267,8 +267,8 @@ export default class WeatherScreen extends Component {
             }
 
             <PoweredBy 
-              source={'https://darksky.net/dev'}
-              name={' DarkSky API'}
+              source={['https://darksky.net/dev']}
+              name={[' DarkSky API']}
             />
           </ScrollView>
         </ImageBackground>

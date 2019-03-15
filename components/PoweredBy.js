@@ -25,7 +25,7 @@ export default class PoweredBy extends React.Component {
     })
   }
 
-  closeModal () {
+  closeModal() {
     this.setState({
       showWebView: false
     })
@@ -38,16 +38,24 @@ export default class PoweredBy extends React.Component {
         <Text style={styles.text}>
           Powered by
         </Text>
-        <TouchableOpacity
-          onPress={() => this.handleLink(this.props.source)}>
-          <Text style={styles.link}>{this.props.name}</Text>
-        </TouchableOpacity>
+        <View style={styles.linkContainer}>
+          {this.props.source.map((source, i) => {
+            return (
+              <View key={i}>
+                <TouchableOpacity
+                  onPress={() => this.handleLink(this.props.source[i])}>
+                  <Text style={styles.link}>{` ${this.props.name[i]} `}</Text>
+                </TouchableOpacity>
 
-        <Modal style={{ margin: 0 }} isVisible={this.state.showWebView}>
+                <Modal style={{ margin: 0 }} isVisible={this.state.showWebView}>
 
-          <WebViewer url={this.state.webViewUrl} closeModal={this.closeModal}/>
+                  <WebViewer url={this.state.webViewUrl} closeModal={this.closeModal} />
 
-        </Modal>
+                </Modal>
+              </View>
+            )
+          })}
+        </View>
 
       </View>
     );
@@ -59,15 +67,21 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    margin: 10
+    width: '100%',
+    margin: 20
   },
   text: {
+    fontFamily: 'Cabin',
     fontSize: 16,
     color: 'white'
   },
+  linkContainer: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
   link: {
+    fontFamily: 'Cabin-Bold',
     fontSize: 16,
-    color: '#4D0B98',
-    fontWeight: '700',
+    color: '#D6EAF8',
   }
 });
