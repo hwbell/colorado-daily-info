@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "colorado-daily-info",
+    "name": "Colorado Daily Info",
     "description": "A very interesting project.",
     "slug": "colorado-daily-info",
     "privacy": "public",
@@ -21,7 +21,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.harrybell.coloradodailyinfo"
+    },
+    "android": {
+      "package": "com.harrybell.coloradodailyinfo"
     }
   }
 }

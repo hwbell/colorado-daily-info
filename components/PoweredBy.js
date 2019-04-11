@@ -67,8 +67,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
+    alignItems: 'center',
     width: '100%',
-    margin: 20
+    height: 40,
+    paddingLeft: 15,
   },
   text: {
     fontFamily: 'Cabin',

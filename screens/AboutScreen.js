@@ -3,37 +3,16 @@ import React, { Component } from 'react';
 import {
   View,
   ScrollView,
-  Image,
+  StyleSheet,
   ImageBackground,
   TouchableOpacity
 } from 'react-native';
 
-import { Button, Text } from 'react-native-elements';
-
-import styles from './AboutScreen.styles';
+import { Text } from 'react-native-elements';
 
 import Credits from '../components/Credits';
 
-// console.log('credits: ')
-// console.log(credits)
 const tools = ['React Native', 'Expo CLI', 'create-react-native-app', 'Node.js', 'Puppeteer.js', 'MongoDB', 'Git', 'Heroku'];
-
-const toolsDisplay = tools.map((tool, i) => {
-  return (
-    <TouchableOpacity style={styles.tool} key={i}>
-      <Text style={styles.toolLink}>{tool}</Text>
-    </TouchableOpacity>
-  )
-});
-
-// const creditsDisplay = Object.keys(credits).map( (prop, i) => {
-//   const html = credits[prop].replace(/div/g, 'View')
-//   return (
-//     <View key={i}>
-//       <View>Icons made by <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></View>
-//     </View>
-//   )
-// });
 
 export default class AboutScreen extends Component {
 
@@ -91,4 +70,95 @@ export default class AboutScreen extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 80, 255, 0.5)',
+  },
+  contentContainer: {
+    // flex: 0, 
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+  title: { 
+    fontFamily: 'Cabin-Bold',
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 32,
+    fontWeight: '400',
+    margin: 50,
+  },
+  subtitle: {
+    fontFamily: 'Cabin',
+    textAlign: 'left',
+    color: 'white',
+    fontSize: 24,
+    fontWeight: '400',
+    marginTop: 0,
+    marginBottom: 10,
+    marginLeft: 20
+  },
+  createdBy: {
+    fontFamily: 'Cabin',
+    textAlign: 'left',
+    color: 'white',
+    fontSize: 20,
+    fontWeight: '400',
+    marginTop: 0,
+    marginBottom: 10,
+    marginLeft: 30
+  },
+
+  paragraph: {
+    fontFamily: 'Cabin',
+    margin: 20,
+    fontSize: 20,
+    fontWeight: '400',
+    color: 'white'
+  },
+  creditsContainer: {
+    // width: '100%',
+  },  
+  credit: {
+    fontFamily: 'Cabin',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start'
+  },
+  toolLink: {
+    fontFamily: 'Cabin',
+    margin: 0,
+    marginLeft: 35,
+    fontSize: 20,
+    fontWeight: '400',
+    color: '#00FFFF'
+  },
+  linkText: {
+    fontFamily: 'Cabin',
+    margin: 5,
+    fontSize: 12,
+    fontWeight: '400',
+    color: '#00FFFF'
+  },
+  authorCreditText: {
+    fontFamily: 'Cabin',
+    textAlign: 'left',
+    color: 'white',
+    fontSize: 12,
+    fontWeight: '400',
+    margin: 5,
+  },
+  
+});
+
+const toolsDisplay = tools.map((tool, i) => {
+  return (
+    <TouchableOpacity style={styles.tool} key={i}>
+      <Text style={styles.toolLink}>{tool}</Text>
+    </TouchableOpacity>
+  )
+});
+
 

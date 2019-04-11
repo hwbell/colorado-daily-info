@@ -488,6 +488,16 @@ const getCredits = (handleLink) => {
       )
     },
 
+    snowStormBackground: {
+      name: 'snow background',
+      html: (
+        <TouchableOpacity
+          onPress={() => handleLink("https://www.freepik.com/free-photos-vectors/background")}>
+
+          <Text style={styles.linkText}>snow background Designed by Freepik</Text>
+        </TouchableOpacity>
+      )
+    },
   }
 
 }

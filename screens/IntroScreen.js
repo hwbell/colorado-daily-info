@@ -3,15 +3,11 @@ import React, { Component } from 'react';
 import {
   View,
   TouchableOpacity,
-  // Text,
-  ScrollView,
-  Image,
+  StyleSheet,
   ImageBackground,
 } from 'react-native';
 
-import { Button, Text } from 'react-native-elements';
-
-import styles from './IntroScreen.styles';
+import { Text } from 'react-native-elements';
 
 export default class WeatherScreen extends Component {
 
@@ -77,33 +73,6 @@ export default class WeatherScreen extends Component {
                 <Text style={styles.fullWidthButtonText}>About this app</Text>
               </TouchableOpacity>
             </View>
-
-            {/* <Button
-            title="Weather"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonText}
-            onPress={() => navigate('Weather')}
-          />
-          <Button
-            title="Snow Conditions"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonText}
-            onPress={() => navigate('Snow')}
-          />
-          <Button
-            title="Traffic"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonText}
-            onPress={() => navigate('Traffic')}
-          /> */}
-
-            {/* <Button
-            title="About this App"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonText}
-            onPress={() => navigate('About')}
-          /> */}
-
           </View>
 
         </View>
@@ -112,10 +81,58 @@ export default class WeatherScreen extends Component {
 
       </View>
 
-
-
-      
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0, 80, 255, 0.5)',
+  },
+  title: {
+    fontSize: 28,
+    fontFamily: 'Cabin',
+    color: 'white',
+    marginTop: 50
+  },
+  subtitle: {
+    fontSize: 22,
+    fontFamily: 'Cabin',
+    color: 'white',
+    margin: 30
+  },
+  buttonContainer: {
+    paddingTop: 10,
+    flex: 1,
+  },
+
+  inputsContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    margin: 0
+  },
+  fullWidthButton: {
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(245, 245, 245, 0.4)',
+    borderWidth: 0.4,
+    borderRadius: 20,
+    height: '90%',
+    width: '100%',
+    margin: 0
+  },
+  fullWidthButtonText: {
+    fontSize: 20,
+    padding: 28,
+    fontFamily: 'Cabin',
+    color: 'white',
+    textAlign: 'center',
+
+  }
+
+});
+
 

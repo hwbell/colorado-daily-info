@@ -3,23 +3,14 @@ import React, { Component } from 'react';
 import {
   View,
   ScrollView,
-  AppRegistry,
   Image,
   ImageBackground,
   Text,
-  TouchableHighlight,
-  Button
+  StyleSheet
 } from 'react-native';
 
+import { LinearGradient } from 'expo'
 import PoweredBy from '../components/PoweredBy';
-
-import styles from './SnowScreen.styles';
-
-//const navigation = this.props.navigation;
-
-const text = {
-  'header': 'Weather'
-}
 
 // get the data into simple pieces from the fetched JSON
 const parseResortInfo = (obj) => {
@@ -104,14 +95,18 @@ export default class SnowScreen extends Component {
     //console.log(this.state)
     return (
 
-      <View style={styles.container}>
-        <ImageBackground
-          style={{ flex: 1 }}
-          opacity={1}
-          imageStyle={{ resizeMode }}
-          source={require('../assets/images/backgrounds/snowbg2.jpg')}
-        >
-          <ScrollView style={styles.container}>
+
+      <ImageBackground
+        style={{ flex: 1 }}
+        opacity={1}
+        imageStyle={{ resizeMode }}
+        source={require('../assets/weather/backgrounds/snow.jpg')}
+      >
+
+        <View style={styles.container}>
+
+          
+          <ScrollView style={styles.scrollContainer}>
 
 
             <View style={styles.topInfoHolder}>
@@ -129,7 +124,7 @@ export default class SnowScreen extends Component {
                 </View>
               </View>
 
-              <View style={styles.contentContainer}>
+              {/* <View style={styles.contentContainer}>
                 <Image
                   style={styles.iconImage}
                   source={require('../assets/images/icons/keystone.png')}
@@ -141,24 +136,85 @@ export default class SnowScreen extends Component {
                   <Text style={styles.numbersText}>{`48 hr: ${keystone.twoDaySnow}`}</Text>
                   <Text style={styles.numbersText}>{`7 days: ${keystone.sevenDaySnow}`}</Text>
                 </View>
-              </View>
+              </View> */}
             </View>
 
             <View style={styles.summaryTextHolder}>
               <Text style={styles.descriptionText}>{`${openSnow.summary}`}</Text>
             </View>
 
-            <PoweredBy
-              source={['https://www.arapahoebasin.com/','https://www.keystoneresort.com/', 'https://opensnow.com/']}
-              name={['A-Basin', 'Keystone', 'Open Snow']}
-            />
+
 
           </ScrollView>
-        </ImageBackground>
 
-      </View>
+          <PoweredBy
+            source={['https://www.arapahoebasin.com/', 'https://www.keystoneresort.com/', 'https://opensnow.com/']}
+            name={['A-Basin', 'Keystone', 'Open Snow']}
+          />
+
+        </View>
+
+      </ImageBackground>
+
+
     );
   }
 }
 
-//AppRegistry.registerComponent('BackgroundImage', () => BackgroundImage);
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // justifyContent: 'flex-start',
+    backgroundColor: 'rgba(0, 80, 255, 0.5)'
+  },
+  scrollContainer: {
+    alignSelf: 'flex-end'
+  },
+  topInfoHolder: {
+    marginTop: 25
+  },
+
+  contentContainer: {
+    // flex: 0, 
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  iconImage: {
+    borderRadius: 10,
+    margin: 24,
+    width: 80,
+    height: 80,
+
+  },
+  smallTextHolder: {
+    // marginTop: 14,
+    // width: 250
+  },
+  summaryTextHolder: {
+    justifyContent: 'center',
+    margin: 18,
+    // backgroundColor: 'rgba(0,0,0,0.4)',
+    borderRadius: 20,
+  },
+  numbersText: {
+    textAlign: 'left',
+    marginTop: 0,
+    marginBottom: 0,
+    color: 'white',
+    fontSize: 18,
+    fontFamily: 'Cabin',
+  },
+  descriptionText: {
+    padding: 10,
+    // paddingLeft: 20,
+    textAlign: 'left',
+    marginTop: 0,
+    marginBottom: 0,
+    color: 'white',
+    fontSize: 18,
+    fontFamily: 'Cabin',
+  },
+
+});
+

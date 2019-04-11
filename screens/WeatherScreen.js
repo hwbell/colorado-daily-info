@@ -12,7 +12,6 @@ import {
   StyleSheet
 } from 'react-native';
 
-import styles from './WeatherScreen.styles';
 import PoweredBy from '../components/PoweredBy';
 
 
@@ -196,14 +195,15 @@ export default class WeatherScreen extends Component {
 
     return (
 
-      <View style={styles.container}>
 
-        <ImageBackground
-          style={{ flex: 1 }}
-          opacity={1}
-          imageStyle={{ resizeMode: 'cover' }}
-          source={weatherBG}
-        >
+
+      <ImageBackground
+        style={{ flex: 1 }}
+        opacity={1}
+        imageStyle={{ resizeMode: 'cover' }}
+        source={weatherBG}
+      >
+        <View style={styles.container}>
 
           <View style={styles.largeTextHolder}>
             <Text style={styles.weatherTodayCityText}>{this.state.city}, CO</Text>
@@ -216,7 +216,7 @@ export default class WeatherScreen extends Component {
           <View style={styles.topIconHolder}>
 
             <View style={styles.weatherSelector}>
-              <TouchableOpacity style={{padding: 10}} onPress={() => { this.getCityWeather('Denver') }}>
+              <TouchableOpacity style={{ padding: 10 }} onPress={() => { this.getCityWeather('Denver') }}>
                 <Image
                   style={styles.topIconImage}
                   source={require('../assets/weather/icons/skyline.png')}
@@ -225,7 +225,7 @@ export default class WeatherScreen extends Component {
             </View>
 
             <View style={styles.weatherSelector}>
-              <TouchableOpacity style={{padding: 10}} onPress={() => { this.getCityWeather('Silverthorne') }}>
+              <TouchableOpacity style={{ padding: 10 }} onPress={() => { this.getCityWeather('Silverthorne') }}>
                 <Image
                   style={styles.topIconImage}
                   source={require('../assets/tab-navigator/icons/mountains.png')}
@@ -235,7 +235,7 @@ export default class WeatherScreen extends Component {
 
           </View>
 
-          <ScrollView style={styles.container}>
+          <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={true}>
 
             {condensedForecast ?
               condensedForecast.map((day, i) => {
@@ -266,16 +266,116 @@ export default class WeatherScreen extends Component {
               : null
             }
 
-            <PoweredBy 
-              source={['https://darksky.net/dev']}
-              name={[' DarkSky API']}
-            />
-          </ScrollView>
-        </ImageBackground>
 
-      </View>
+          </ScrollView>
+          <PoweredBy
+            source={['https://darksky.net/dev']}
+            name={[' DarkSky API']}
+          />
+        </View>
+      </ImageBackground>
+
+
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // flexDirection: 'column',
+    // justifyContent: 'flex-start',
+    // alignItems: 'center',
+    backgroundColor: 'rgba(0, 80, 255, 0.5)',
+  },
+  scrollContainer: {
+    // flex: 1
+  },  
+  largeTextHolder: {
+    // backgroundColor: 'rgba(0, 80, 255, 0.5)',
+  },
+  contentContainer: {
+    padding: 5,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: 'rgba(0, 80, 255, 0.5)',
+    borderColor: 'rgba(245, 245, 245, 0.4)',
+    borderWidth: 0.5,
+    // borderRadius: 20,
+  },
+  topIconHolder: {
+    // backgroundColor: 'rgba(0, 80, 255, 0.5)',
+    width: '100%',
+    paddingTop: 20,
+    paddingBottom: 20,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+
+    // margin: 30
+  },
+  topIconImage: {
+    width: 65,
+    height: 65
+  },
+
+  textHolder: {
+    // paddingTop: 10,
+    paddingLeft: 20,
+    width: '40%',
+  },
+
+  iconHolder: {
+    width: '20%',
+  },
+  iconImage: {
+    borderRadius: 10,
+    marginRight: 20,
+    // marginTop: 8,
+    width: 45,
+    height: 45
+  },
+  weatherTodayCityText: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 24,
+    fontFamily: 'Cabin',
+    marginTop: 30,
+    marginBottom: 10,
+  },
+  weatherTodayDescText: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 22,
+    fontFamily: 'Cabin',
+  },
+  weatherTodayTempText: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 36,
+    fontFamily: 'Cabin-Bold',
+  },
+
+  weatherSelector: {
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderColor: 'rgba(245, 245, 245, 0.4)',
+    borderWidth: 0.4,
+    borderRadius: 20,
+  },
+
+  weatherForecastDescText: {
+    color: 'white',
+    fontSize: 14,
+    fontFamily: 'Cabin',
+  },
+  weatherForecastTempText: {
+    color: 'white',
+    fontSize: 18,
+    fontFamily: 'Cabin',
+  }
+});
+
 
 //AppRegistry.registerComponent('BackgroundImage', () => BackgroundImage);
