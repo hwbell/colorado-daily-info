@@ -134,9 +134,20 @@ export default class WeatherScreen extends Component {
 
   constructor(props) {
     super(props);
+    this.renderWeatherSelectors = this.renderWeatherSelectors.bind(this);
     this.getCityWeather = this.getCityWeather.bind(this);
   }
   state = {
+    availableCities: [
+      {
+        name: 'Denver',
+        iconSrc: require('../assets/weather/icons/skyline.png')
+      },
+      {
+        name: 'Silverthorne',
+        iconSrc: require('../assets/tab-navigator/icons/mountains.png')
+      }
+    ],
     city: '',
     country: '',
     todayWeather: '',
@@ -157,6 +168,10 @@ export default class WeatherScreen extends Component {
   }
 
   getCityWeather(city) {
+
+    // console.log(city)
+    // console.log(this.state.city)
+
     let cityToFetch = city.toLowerCase();
     return fetch(`https://lit-falls-35438.herokuapp.com/${cityToFetch}-weather`)
       .then((response) => response.json())
@@ -164,7 +179,7 @@ export default class WeatherScreen extends Component {
         const todayWeather = response.data.currently;
 
         this.setState({
-          city: `${city}`,
+          city: city,
           currentTemp: Math.floor(todayWeather.temperature),
           highTemp: response.data.daily.data[0].temperatureHigh, // currently doesn't have high/low
           lowTemp: response.data.daily.data[0].temperatureLow, // '' '' 
@@ -178,12 +193,59 @@ export default class WeatherScreen extends Component {
           forecast: makeForeCastList(response.data.daily.data),
         }, function () {
           // console.log(`this.state.backgroundId: ${this.state.backgroundId}`)
+          this.renderWeatherSelectors();
         });
 
       })
       .catch((error) => {
         console.error(error);
       });
+
+      
+  }
+
+  renderWeatherSelectors() {
+
+    const buttonColor = 'rgba(215, 255, 255, 0.45)';
+    const activeButtonColor = 'rgba(105, 105, 255, 0.45)';
+
+    return (
+      <View style={styles.topIconHolder}>
+
+        <View style={styles.topTextHolder}>
+          <Text style={styles.weatherTodayCityText}>{this.state.city}, CO</Text>
+
+          <Text style={styles.weatherTodayTempText}>{this.state.currentTemp} &deg;F </Text>
+
+          <Text style={styles.weatherTodayDescText}>{this.state.descr}</Text>
+        </View>
+
+        {
+          this.state.availableCities.map((city, i) => {
+
+            // color the button depending on which city is currently selected
+
+            console.log(city, this.state.city)
+            let buttonStyle = {
+              backgroundColor: this.state.city === city ? activeButtonColor : buttonColor,
+              borderRadius: 20,
+              padding: 10,
+              marginTop: 15
+            }
+
+            return (
+              <TouchableOpacity key={i} style={buttonStyle} onPress={() => { this.getCityWeather(city.name) }}>
+                <Image
+                  style={styles.topIconImage}
+                  source={city.iconSrc}
+                ></Image>
+              </TouchableOpacity>
+            )
+          })
+        }
+
+      </View>
+    )
   }
 
   render() {
@@ -195,8 +257,6 @@ export default class WeatherScreen extends Component {
 
     return (
 
-
-
       <ImageBackground
         style={{ flex: 1 }}
         opacity={1}
@@ -207,41 +267,13 @@ export default class WeatherScreen extends Component {
 
           <PageTitle
             title='Weather'
-            subtitle='know before you go!'
+            subtitle='know before you go'
           />
 
+          {/* the buttons for changing locations along with the display of city name/ temp / short description */}
+          {this.renderWeatherSelectors()}
 
-
-          <View style={styles.topIconHolder}>
-
-            <View style={styles.largeTextHolder}>
-              <Text style={styles.weatherTodayCityText}>{this.state.city}, CO</Text>
-
-              <Text style={styles.weatherTodayTempText}>{this.state.currentTemp} &deg;F </Text>
-
-              <Text style={styles.weatherTodayDescText}>{this.state.descr}</Text>
-            </View>
-
-            <View style={styles.weatherSelector}>
-              <TouchableOpacity style={{ padding: 10 }} onPress={() => { this.getCityWeather('Denver') }}>
-                <Image
-                  style={styles.topIconImage}
-                  source={require('../assets/weather/icons/skyline.png')}
-                ></Image>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.weatherSelector}>
-              <TouchableOpacity style={{ padding: 10 }} onPress={() => { this.getCityWeather('Silverthorne') }}>
-                <Image
-                  style={styles.topIconImage}
-                  source={require('../assets/tab-navigator/icons/mountains.png')}
-                ></Image>
-              </TouchableOpacity>
-            </View>
-
-          </View>
-
+          {/* the daily forecast scroller */}
           <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={true}>
 
             {condensedForecast ?
@@ -277,11 +309,13 @@ export default class WeatherScreen extends Component {
 
 
           </ScrollView>
+
           <PoweredBy
             source={['https://darksky.net/dev']}
             name={[' DarkSky API']}
           />
         </View>
+
       </ImageBackground>
 
 
@@ -293,31 +327,34 @@ const buttonColor = 'rgba(215, 255, 255, 0.45)';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // flexDirection: 'column',
-    // justifyContent: 'flex-start',
-    // alignItems: 'center',
     backgroundColor: 'rgba(0, 80, 255, 0.5)',
   },
   scrollContainer: {
-    // flex: 1
+    // 
   },
-  largeTextHolder: {
-    // backgroundColor: 'rgba(0, 80, 255, 0.5)',
+  topTextHolder: {
+    marginTop: 12,
+    width: '45%'
+  },
+  weatherSelector: {
+    backgroundColor: buttonColor,
+    // borderColor: 'rgba(245, 245, 245, 0.4)',
+    // borderWidth: 0.4,
+    borderRadius: 20,
+    padding: 10,
+    marginTop: 15
   },
   topIconHolder: {
-    // backgroundColor: 'rgba(0, 80, 255, 0.5)',
-    width: '100%',
-    paddingTop: 20,
+    width: '90%',
     paddingBottom: 20,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around',
-
-    // margin: 30
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   topIconImage: {
-    width: 65,
-    height: 65
+    width: 60,
+    height: 60
   },
   contentContainer: {
     flex: 1,
@@ -333,17 +370,18 @@ const styles = StyleSheet.create({
   },
   textHolder: {
     // paddingTop: 10,
-    paddingLeft: 20,
+    paddingLeft: 18,
     width: '40%',
   },
 
 
   iconHolder: {
     width: '20%',
+    // marginTop: 30
   },
   iconImage: {
-    borderRadius: 10,
-    marginRight: 20,
+    // borderRadius: 10,
+    // marginRight: 20,
     // marginTop: 8,
     width: 45,
     height: 45
@@ -351,29 +389,21 @@ const styles = StyleSheet.create({
   weatherTodayCityText: {
     textAlign: 'center',
     color: 'white',
-    fontSize: 24,
+    fontSize: 20,
     fontFamily: 'Cabin',
-    marginTop: 30,
-    marginBottom: 10,
   },
   weatherTodayDescText: {
     textAlign: 'center',
     color: 'white',
-    fontSize: 22,
+    fontSize: 20,
     fontFamily: 'Cabin',
   },
   weatherTodayTempText: {
     textAlign: 'center',
-    color: 'white',
-    fontSize: 36,
-    fontFamily: 'Cabin-Bold',
-  },
 
-  weatherSelector: {
-    backgroundColor: buttonColor,
-    borderColor: 'rgba(245, 245, 245, 0.4)',
-    borderWidth: 0.4,
-    borderRadius: 20,
+    color: 'white',
+    fontSize: 34,
+    fontFamily: 'Cabin-Bold',
   },
 
   weatherForecastDescText: {

@@ -75,14 +75,15 @@ export default class SnowScreen extends Component {
 
         <View style={styles.container}>
 
-          <PageTitle 
-            title='Weekend Traffic Forecast'
+          <PageTitle
+            title='Traffic Outlook'
             subtitle={traffic.weekend[1]}
           />
 
           <ScrollView style={styles.scrollContainer}>
+
             <View style={styles.contentContainer}>
-              
+
               <View style={styles.textHolder}>
                 {traffic.weekend.map((p, i) => {
                   return (
@@ -90,9 +91,8 @@ export default class SnowScreen extends Component {
                   )
                 })}
               </View>
+
             </View>
-
-
 
           </ScrollView>
 
@@ -121,9 +121,15 @@ const styles = StyleSheet.create({
   scrollContainer: {
     // width: '100%'
   },
+  contentContainer: {
+    // marginTop: 30,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
   textHolder: {
     // marginTop: 18,
-    width: '95%',
+    marginHorizontal: 18,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -139,23 +145,7 @@ const styles = StyleSheet.create({
     color: 'white',
     margin: 18
   },
-  contentContainer: {
-    // marginTop: 30,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    // backgroundColor: 'rgba(0,0,0,0.2)',
-    // borderColor: 'rgba(245, 245, 245, 0.4)',
-    // borderWidth: 0.5,
-    borderRadius: 15,
-  },
-  iconImage: {
-    borderRadius: 10,
-    margin: 20,
-    width: 80,
-    height: 80,
 
-  },
   trafficDescriptionText: {
     textAlign: 'left',
     marginTop: 0,

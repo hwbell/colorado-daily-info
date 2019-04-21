@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     marginTop: 50
   },
   subtitle: {
-    fontSize: 12 * PixelRatio.get(),
+    fontSize: 10 * PixelRatio.get(),
     fontFamily: 'Cabin',
     color: 'white',
     margin: 18

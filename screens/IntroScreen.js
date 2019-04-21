@@ -92,7 +92,7 @@ export default class IntroScreen extends Component {
 
             <View>
               <Text style={styles.subtitle}>
-                Everything a Denverite needs to know before heading to the mountains.
+                Everything a local needs to know before heading to the mountains.
             </Text>
             </View>
 
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(245, 245, 245, 0.4)',
     borderWidth: 0.4,
     borderRadius: 50,
-    width: '80%',
+    width: '75%',
     margin: 6
   },
   buttonText: {

@@ -14,7 +14,42 @@ import PageTitle from '../components/PageTitle';
 import Credits from '../components/Credits';
 import LinksList from '../components/LinksList';
 
-const tools = ['React Native', 'Expo CLI', 'Node.js', 'Express.js', 'Puppeteer.js', 'MongoDB', 'Git', 'Heroku'];
+const tools = [
+  // 'React Native', 'Expo CLI', 'Node.js', 'Express.js', 'Puppeteer.js', 'MongoDB', 'Git', 'Heroku'
+  {
+    name: 'React Native',
+    src: 'https://facebook.github.io/react-native/'
+  },
+  {
+    name: 'Node.js',
+    src: 'https://nodejs.org/en/'
+  },
+
+  {
+    name: 'Express.js',
+    src: 'https://expressjs.com/'
+  },
+  {
+    name: 'Puppeteer.js',
+    src: 'https://developers.google.com/web/tools/puppeteer/'
+  },
+  {
+    name: 'MongoDB',
+    src: 'https://www.mongodb.com/'
+  },
+  {
+    name: 'Github',
+    src: 'https://github.com/'
+  },
+  {
+    name: 'Heroku',
+    src: 'https://heroku.com/'
+  },
+  {
+    name: 'React Native',
+    src: 'https://facebook.github.io/react-native/'
+  },
+];
 
 export default class AboutScreen extends Component {
 
@@ -64,6 +99,7 @@ export default class AboutScreen extends Component {
 
                 <LinksList
                   links={tools}
+                  handleLink={this.handleLink}
                 />
 
                 <Credits />

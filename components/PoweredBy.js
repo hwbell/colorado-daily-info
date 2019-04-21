@@ -84,6 +84,6 @@ const styles = StyleSheet.create({
   link: {
     fontFamily: 'Cabin-Bold',
     fontSize: 16,
-    color: '#D6EAF8',
+    color: '#00FFFF',
   }
 });

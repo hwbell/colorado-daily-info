@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Image, Platform, StatusBar, StyleSheet, View, ActivityIndicator } from 'react-native';
+import { Animated, PixelRatio, Platform, StatusBar, StyleSheet, View, ActivityIndicator } from 'react-native';
 import { AppLoading, Asset, Font, Icon, SplashScreen } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 
@@ -39,7 +39,7 @@ export default class App extends React.Component {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'rgba(0, 80, 255, 0.75)',
+      backgroundColor: 'rgba(0, 80, 255, 0.95)',
       opacity: this.state.splashAnimation.interpolate({
         inputRange: [0, 1],
         outputRange: [1, 0],
@@ -54,6 +54,7 @@ export default class App extends React.Component {
       // left: 0,
       // bottom: 0,
       // right: 0,
+      margin: 20,
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
@@ -69,8 +70,8 @@ export default class App extends React.Component {
   _maybeRenderLoadingImage = () => {
 
     const animatedImageStyle = {
-      width: 50,
-      height: 50,
+      width: 65,
+      height: 65,
       margin: 10,
       // position: 'absolute',
       // top: 0,
@@ -82,15 +83,16 @@ export default class App extends React.Component {
         {
           scale: this.state.splashAnimation.interpolate({
             inputRange: [0, 1],
-            outputRange: [1, 4],
+            outputRange: [1, 2],
           }),
         },
       ],
     }
 
     const animatedTextStyle = {
+      fontSize: 10 * PixelRatio.get(),
       color: 'whitesmoke',
-      fontFamily: 'Avenir-Roman',
+      fontFamily: 'Cabin',
       fontWeight: 'bold'
     }
 
@@ -139,7 +141,7 @@ export default class App extends React.Component {
           <Animated.Text style={animatedTextStyle}>
             loading resources ...
           </Animated.Text>
-          <ActivityIndicator size="large" color="#0000ff" />
+          <ActivityIndicator style={{marginLeft: 10}} size="large" color="white" />
         </Animated.View>
 
 
@@ -169,7 +171,7 @@ export default class App extends React.Component {
       fetch(`https://lit-falls-35438.herokuapp.com/Denver-weather`)
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
+        // console.log(response);
       })
       .catch((error) => {
         console.error(error);
@@ -177,7 +179,7 @@ export default class App extends React.Component {
       fetch(`https://lit-falls-35438.herokuapp.com/snow`)
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
+        // console.log(response);
       })
       .catch((error) => {
         console.error(error);
@@ -185,7 +187,7 @@ export default class App extends React.Component {
       fetch(`https://lit-falls-35438.herokuapp.com/traffic`)
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
+        // console.log(response);
       })
       .catch((error) => {
         console.error(error);

@@ -46,6 +46,13 @@ const parseResortInfo = (obj) => {
 }
 
 export default class SnowScreen extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.renderResortInfo = this.renderResortInfo.bind(this);
+  }
+
   state = {
 
     aBasin: {
@@ -86,6 +93,18 @@ export default class SnowScreen extends Component {
       });
   }
 
+  renderResortInfo(resort) {
+    return (
+      <View style={styles.statsTextHolder}>
+        <Text style={styles.numbersText}>{`${resort.snowConditions}`}</Text>
+        <Text style={styles.numbersText}>{`base: ${resort.baseSnow}`}</Text>
+        <Text style={styles.numbersText}>{`24 hr: ${resort.pastDaySnow}`}</Text>
+        <Text style={styles.numbersText}>{`72: ${resort.threeDaySnow}`}</Text>
+
+      </View>
+    )
+  }
+
   render() {
 
     const resizeMode = 'cover';
@@ -106,35 +125,40 @@ export default class SnowScreen extends Component {
 
         <View style={styles.container}>
 
-          <PageTitle 
+          <PageTitle
             title='Recent Snowfall'
             subtitle='seek the pow...'
           />
-          
+
           <ScrollView style={styles.scrollContainer}>
 
+            <View style={styles.contentContainer}>
 
-            <View style={styles.topInfoHolder}>
-              <View style={styles.contentContainer}>
+              {/* the daily summary from opensnow */}
+              <View style={styles.summaryTextHolder}>
+                <Text style={styles.descriptionText}>{`${openSnow.summary}`}</Text>
+              </View>
+
+
+              {/* iconContainer for each resort / snow report with logo, right now season is ending so only a basin */}
+              <View style={styles.iconContainer}>
                 <Image
                   style={styles.iconImage}
                   source={require('../assets/images/icons/abasin.png')}
                 ></Image>
-                <View style={styles.smallTextHolder}>
-                  <Text style={styles.numbersText}>{`${aBasin.snowConditions}`}</Text>
-                  <Text style={styles.numbersText}>{`base: ${aBasin.baseSnow}`}</Text>
-                  <Text style={styles.numbersText}>{`24 hr: ${aBasin.pastDaySnow}`}</Text>
-                  <Text style={styles.numbersText}>{`72: ${aBasin.threeDaySnow}`}</Text>
 
-                </View>
+                {/* abasin info */}
+                {this.renderResortInfo(aBasin)}
+
               </View>
 
+              {/* keystone info */}
               {/* <View style={styles.contentContainer}>
                 <Image
                   style={styles.iconImage}
                   source={require('../assets/images/icons/keystone.png')}
                 ></Image>
-                <View style={styles.smallTextHolder}>
+                <View style={styles.statsTextHolder}>
                   <Text style={styles.numbersText}>{`${keystone.snowConditions}`}</Text>
                   <Text style={styles.numbersText}>{`base: ${keystone.baseSnow}`}</Text>
                   <Text style={styles.numbersText}>{`24 hr: ${keystone.pastDaySnow}`}</Text>
@@ -142,13 +166,8 @@ export default class SnowScreen extends Component {
                   <Text style={styles.numbersText}>{`7 days: ${keystone.sevenDaySnow}`}</Text>
                 </View>
               </View> */}
+
             </View>
-
-            <View style={styles.summaryTextHolder}>
-              <Text style={styles.descriptionText}>{`${openSnow.summary}`}</Text>
-            </View>
-
-
 
           </ScrollView>
 
@@ -173,34 +192,34 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 80, 255, 0.5)'
   },
   scrollContainer: {
-    alignSelf: 'flex-end'
+    // alignSelf: 'flex-end'
   },
-  topInfoHolder: {
-    marginTop: 25
+  contentContainer: {
+    // marginTop: 30,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
   },
 
-  contentContainer: {
+  iconContainer: {
     // flex: 0, 
+    marginHorizontal: 22,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
   iconImage: {
     borderRadius: 10,
-    margin: 24,
     width: 80,
     height: 80,
-
   },
-  smallTextHolder: {
-    // marginTop: 14,
-    // width: 250
+  statsTextHolder: {
+    padding: 12
   },
   summaryTextHolder: {
-    justifyContent: 'center',
     margin: 18,
-    // backgroundColor: 'rgba(0,0,0,0.4)',
-    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   numbersText: {
     textAlign: 'left',
@@ -211,8 +230,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Cabin',
   },
   descriptionText: {
-    padding: 10,
-    // paddingLeft: 20,
     textAlign: 'left',
     marginTop: 0,
     marginBottom: 0,
