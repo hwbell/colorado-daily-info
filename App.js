@@ -19,6 +19,7 @@ export default class App extends React.Component {
 
   _loadAsync = async () => {
     try {
+      // call the resources, wait for load completion
       await this._loadResourcesAsync();
     } catch (e) {
       this._handleLoadingError(e);
@@ -26,21 +27,6 @@ export default class App extends React.Component {
       this._handleFinishLoading();
     }
   };
-
-  render() {
-
-    if (!this.state.isLoadingComplete) {
-      return <View />;
-    }
-
-    return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
-        {this._maybeRenderLoadingImage()}
-      </View>
-    );
-  }
 
   getAnimatedContainerStyle = () => {
     return {
@@ -108,9 +94,17 @@ export default class App extends React.Component {
       fontWeight: 'bold'
     }
 
+    // as long as the animation isn't complete, 
     if (this.state.splashAnimationComplete) {
       return null;
     }
+
+    const iconSources = [
+      './assets/weather/icons/skyline.png',
+      './assets/tab-navigator/icons/mountains.png',
+      '/assets/tab-navigator/icons/cloud.png',
+      './assets/tab-navigator/icons/skiing.png'
+    ]
 
     return (
       <Animated.View
@@ -166,11 +160,29 @@ export default class App extends React.Component {
     });
   };
 
+  // these calls will be made and completed before the app is available for the 
+  // user. 
   _loadResourcesAsync = async () => {
 
     return Promise.all([
       // make a fe
       fetch(`https://lit-falls-35438.herokuapp.com/Denver-weather`)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      }),
+      fetch(`https://lit-falls-35438.herokuapp.com/snow`)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      }),
+      fetch(`https://lit-falls-35438.herokuapp.com/traffic`)
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
@@ -211,7 +223,25 @@ export default class App extends React.Component {
   _handleFinishLoading = () => {
     this.setState({ isLoadingComplete: true });
   };
+
+  render() {
+
+    if (!this.state.isLoadingComplete) {
+      return <View />;
+    }
+
+    return (
+      <View style={styles.container}>
+        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        <AppNavigator />
+        {this._maybeRenderLoadingImage()}
+      </View>
+    );
+  }
+
 }
+
+
 
 const styles = StyleSheet.create({
   container: {

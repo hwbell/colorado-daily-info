@@ -6,16 +6,18 @@ import {
   StyleSheet,
   ImageBackground,
   Text,
+  PixelRatio
 } from 'react-native';
 
 import PoweredBy from '../components/PoweredBy';
+import PageTitle from '../components/PageTitle';
 
 const parseTrafficInfo = (obj) => {
   // get the weekend traffic forecast. 
   const weekendTrafficInfo = obj.traffic.weekendTraffic;
 
   // we can just get the portion
-  // of an array withing the object, which starts with 'TRAVEL FORECAST & TIPS'.
+  // of an array within the object, which starts with 'TRAVEL FORECAST & TIPS'.
   // Just get the portion between 'WEEKEND TRAVEL FORECAST' and 'Have a great weekend!'.
   let start = weekendTrafficInfo.indexOf('WEEKEND TRAVEL FORECAST');
   let end = weekendTrafficInfo.indexOf('TIPS FOR I-70 MOUNTAIN TRAVEL');
@@ -73,15 +75,10 @@ export default class SnowScreen extends Component {
 
         <View style={styles.container}>
 
-          <View style={styles.textHolder}>
-            <Text style={styles.title}>
-              Weekend Traffic Forecast
-            </Text>
-
-            <Text style={styles.subtitle}>
-              {traffic.weekend[1]}
-            </Text>
-          </View>
+          <PageTitle 
+            title='Weekend Traffic Forecast'
+            subtitle={traffic.weekend[1]}
+          />
 
           <ScrollView style={styles.scrollContainer}>
             <View style={styles.contentContainer}>
@@ -122,19 +119,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   scrollContainer: {
-    // flex: 1,
+    // width: '100%'
+  },
+  textHolder: {
+    // marginTop: 18,
+    width: '95%',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   title: {
-    fontSize: 28,
+    fontSize: 14 * PixelRatio.get(),
     fontFamily: 'Cabin',
     color: 'white',
     marginTop: 50
   },
   subtitle: {
-    fontSize: 20,
+    fontSize: 10 * PixelRatio.get(),
     fontFamily: 'Cabin',
     color: 'white',
-    marginTop: 30
+    margin: 18
   },
   contentContainer: {
     // marginTop: 30,
@@ -152,13 +155,6 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
 
-  },
-
-  textHolder: {
-    // marginTop: 18,
-    width: 350,
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   trafficDescriptionText: {
     textAlign: 'left',

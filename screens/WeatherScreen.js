@@ -4,16 +4,16 @@ import {
   View,
   ScrollView,
   AppRegistry,
+  PixelRatio,
   Image,
   ImageBackground,
   Text,
   TouchableOpacity,
-  Button,
   StyleSheet
 } from 'react-native';
 
 import PoweredBy from '../components/PoweredBy';
-
+import PageTitle from '../components/PageTitle'
 
 //const navigation = this.props.navigation;
 
@@ -205,15 +205,22 @@ export default class WeatherScreen extends Component {
       >
         <View style={styles.container}>
 
-          <View style={styles.largeTextHolder}>
-            <Text style={styles.weatherTodayCityText}>{this.state.city}, CO</Text>
+          <PageTitle
+            title='Weather'
+            subtitle='know before you go!'
+          />
 
-            <Text style={styles.weatherTodayTempText}>{this.state.currentTemp} &deg;F </Text>
 
-            <Text style={styles.weatherTodayDescText}>{this.state.descr}</Text>
-          </View>
 
           <View style={styles.topIconHolder}>
+
+            <View style={styles.largeTextHolder}>
+              <Text style={styles.weatherTodayCityText}>{this.state.city}, CO</Text>
+
+              <Text style={styles.weatherTodayTempText}>{this.state.currentTemp} &deg;F </Text>
+
+              <Text style={styles.weatherTodayDescText}>{this.state.descr}</Text>
+            </View>
 
             <View style={styles.weatherSelector}>
               <TouchableOpacity style={{ padding: 10 }} onPress={() => { this.getCityWeather('Denver') }}>
@@ -246,13 +253,15 @@ export default class WeatherScreen extends Component {
                   <View key={i} style={styles.contentContainer}>
 
                     <View style={styles.textHolder}>
-                      <Text style={styles.weatherForecastDescText}>{day.date}</Text>
                       <Text style={styles.weatherForecastDescText}>{day.desc}</Text>
+                      <Text style={styles.weatherForecastDescText}>{day.date}</Text>
                     </View>
+
                     <View style={styles.textHolder}>
                       <Text style={styles.weatherForecastTempText}>{day.tempHigh} &deg;F</Text>
                       <Text style={styles.weatherForecastTempText}>{day.tempLow} &deg;F</Text>
                     </View>
+
                     <View style={styles.iconHolder}>
                       <Image
                         style={styles.iconImage}
@@ -280,6 +289,7 @@ export default class WeatherScreen extends Component {
   }
 }
 
+const buttonColor = 'rgba(215, 255, 255, 0.45)';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -290,20 +300,9 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     // flex: 1
-  },  
+  },
   largeTextHolder: {
     // backgroundColor: 'rgba(0, 80, 255, 0.5)',
-  },
-  contentContainer: {
-    padding: 5,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    // backgroundColor: 'rgba(0, 80, 255, 0.5)',
-    borderColor: 'rgba(245, 245, 245, 0.4)',
-    borderWidth: 0.5,
-    // borderRadius: 20,
   },
   topIconHolder: {
     // backgroundColor: 'rgba(0, 80, 255, 0.5)',
@@ -320,12 +319,24 @@ const styles = StyleSheet.create({
     width: 65,
     height: 65
   },
-
+  contentContainer: {
+    flex: 1,
+    padding: 5,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: 'rgba(0, 80, 255, 0.5)',
+    borderColor: 'rgba(245, 245, 245, 0.4)',
+    borderWidth: 0.5,
+    // borderRadius: 20,
+  },
   textHolder: {
     // paddingTop: 10,
     paddingLeft: 20,
     width: '40%',
   },
+
 
   iconHolder: {
     width: '20%',
@@ -359,7 +370,7 @@ const styles = StyleSheet.create({
   },
 
   weatherSelector: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: buttonColor,
     borderColor: 'rgba(245, 245, 245, 0.4)',
     borderWidth: 0.4,
     borderRadius: 20,

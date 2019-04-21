@@ -11,12 +11,13 @@ import {
 
 import { LinearGradient } from 'expo'
 import PoweredBy from '../components/PoweredBy';
+import PageTitle from '../components/PageTitle';
 
 // get the data into simple pieces from the fetched JSON
 const parseResortInfo = (obj) => {
 
   const aBasinInfo = obj.aBasinWeather.aBasinToday;
-  const keystoneInfo = obj.keystoneWeather.keystoneToday;
+  // const keystoneInfo = obj.keystoneWeather.keystoneToday;
   const openSnowInfo = obj.openSnowOutlook.openSnowToday;
   //console.log(`aBasinInfo: ${aBasinInfo[0]}`)
 
@@ -31,13 +32,13 @@ const parseResortInfo = (obj) => {
       // tomorrowTemp: aBasinInfo[14],
       // tomorrowWeather: aBasinInfo[15],
     },
-    keystone: {
-      pastDaySnow: keystoneInfo[5],
-      twoDaySnow: keystoneInfo[8],
-      sevenDaySnow: keystoneInfo[11],
-      baseSnow: keystoneInfo[14],
-      snowConditions: keystoneInfo[0],
-    },
+    // keystone: {
+    //   pastDaySnow: keystoneInfo[5],
+    //   twoDaySnow: keystoneInfo[8],
+    //   sevenDaySnow: keystoneInfo[11],
+    //   baseSnow: keystoneInfo[14],
+    //   snowConditions: keystoneInfo[0],
+    // },
     openSnow: {
       summary: openSnowInfo[2],
     }
@@ -89,7 +90,7 @@ export default class SnowScreen extends Component {
 
     const resizeMode = 'cover';
     const aBasin = this.state.aBasin;
-    const keystone = this.state.keystone;
+    // const keystone = this.state.keystone;
     const openSnow = this.state.openSnow;
     console.log(`aBasin.pastDaySnow:  ${this.state.aBasin}`)
     //console.log(this.state)
@@ -105,6 +106,10 @@ export default class SnowScreen extends Component {
 
         <View style={styles.container}>
 
+          <PageTitle 
+            title='Recent Snowfall'
+            subtitle='seek the pow...'
+          />
           
           <ScrollView style={styles.scrollContainer}>
 

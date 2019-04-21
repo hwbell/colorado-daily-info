@@ -5,14 +5,38 @@ import {
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
+  Dimensions,
+  PixelRatio
 } from 'react-native';
 
 import { Text } from 'react-native-elements';
 
-export default class WeatherScreen extends Component {
+// the info for the buttons
+const buttonsInfo = [
+  {
+    title: 'Weather',
+    route: 'Weather'
+  },
+  {
+    title: 'Snowfall',
+    route: 'Snow'
+  },
+  {
+    title: 'Traffic',
+    route: 'Traffic'
+  },
+  // {
+  //   title: 'About this App',
+  //   route: 'About'
+  // },
+]
+
+export default class IntroScreen extends Component {
 
   constructor(props) {
     super(props);
+
+    this.renderButtons = this.renderButtons.bind(this);
   }
   state = {
     //
@@ -20,6 +44,30 @@ export default class WeatherScreen extends Component {
 
   componentDidMount() {
 
+  }
+
+  // render them together with the provided info
+  renderButtons(buttonArr, navigate) {
+
+    const buttonContainerStyle = {
+      paddingTop: 10,
+      flex: 1,
+    }
+
+    return (
+      <View style={styles.buttonContainer}>
+        {
+          buttonArr.map((button, i) => {
+            return (
+              <TouchableOpacity key={i} style={styles.fullWidthButton} onPress={() => navigate(button.route)}>
+                <Text style={styles.buttonText}>{button.title}</Text>
+              </TouchableOpacity>
+            )
+          })
+        }
+      </View>
+
+    )
   }
 
   render() {
@@ -35,48 +83,23 @@ export default class WeatherScreen extends Component {
           source={require('../assets/weather/backgrounds/night/clear-night-home.png')}
         >
 
-        <View style={styles.container}>
-          <View>
-            <Text style={styles.title}>
-              Colorado Daily Info
+          <View style={styles.contentContainer}>
+            <View>
+              <Text style={styles.title}>
+                Denver Mountain Daily
+              </Text>
+            </View>
+
+            <View>
+              <Text style={styles.subtitle}>
+                Everything a Denverite needs to know before heading to the mountains.
             </Text>
+            </View>
+
+            {this.renderButtons(buttonsInfo, navigate)}
+
           </View>
 
-          <View>
-            <Text style={styles.subtitle}>
-              Everything a Denver skier needs to know before heading to the mountains.
-            </Text>
-          </View>
-
-          <View style={styles.buttonContainer}>
-
-            <View style={styles.inputsContainer}>
-              <TouchableOpacity style={styles.fullWidthButton} onPress={() => navigate('Weather')}>
-                <Text style={styles.fullWidthButtonText}>Check the weather</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.inputsContainer}>
-              <TouchableOpacity style={styles.fullWidthButton} onPress={() => navigate('Snow')}>
-                <Text style={styles.fullWidthButtonText}>Recent snowfall</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.inputsContainer}>
-              <TouchableOpacity style={styles.fullWidthButton} onPress={() => navigate('Traffic')}>
-                <Text style={styles.fullWidthButtonText}>Traffic this weekend</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.inputsContainer}>
-              <TouchableOpacity style={styles.fullWidthButton} onPress={() => navigate('About')}>
-                <Text style={styles.fullWidthButtonText}>About this app</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-
-        </View>
-          
         </ImageBackground>
 
       </View>
@@ -85,8 +108,14 @@ export default class WeatherScreen extends Component {
   }
 }
 
+const buttonColor = 'rgba(215, 255, 255, 0.45)'
+
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+
+  contentContainer: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
@@ -94,39 +123,34 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 80, 255, 0.5)',
   },
   title: {
-    fontSize: 28,
+    fontSize: 14 * PixelRatio.get(),
     fontFamily: 'Cabin',
     color: 'white',
     marginTop: 50
   },
   subtitle: {
-    fontSize: 22,
+    fontSize: 10 * PixelRatio.get(),
     fontFamily: 'Cabin',
     color: 'white',
     margin: 30
   },
   buttonContainer: {
-    paddingTop: 10,
-    flex: 1,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 
-  inputsContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    margin: 0
-  },
   fullWidthButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: buttonColor,
     borderColor: 'rgba(245, 245, 245, 0.4)',
     borderWidth: 0.4,
-    borderRadius: 20,
-    height: '90%',
-    width: '100%',
-    margin: 0
+    borderRadius: 50,
+    width: '80%',
+    margin: 6
   },
-  fullWidthButtonText: {
-    fontSize: 20,
-    padding: 28,
+  buttonText: {
+    fontSize: 14 * PixelRatio.get(),
+    padding: 20,
     fontFamily: 'Cabin',
     color: 'white',
     textAlign: 'center',

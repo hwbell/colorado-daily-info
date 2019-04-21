@@ -147,8 +147,8 @@ Uniformity=50
 
 [White Balance]
 Setting=Camera
-Temperature=6504
-Green=1
+Temperature=6490
+Green=1.0019899871615525
 Equal=1
 TemperatureBias=0
 
@@ -247,8 +247,8 @@ Radius=40
 Enabled=false
 X=-1
 Y=-1
-W=15000
-H=15000
+W=751
+H=1335
 FixedRatio=true
 Ratio=3:2
 Orientation=As Image

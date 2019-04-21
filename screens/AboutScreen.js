@@ -5,14 +5,16 @@ import {
   ScrollView,
   StyleSheet,
   ImageBackground,
-  TouchableOpacity
+  PixelRatio
 } from 'react-native';
 
 import { Text } from 'react-native-elements';
 
+import PageTitle from '../components/PageTitle';
 import Credits from '../components/Credits';
+import LinksList from '../components/LinksList';
 
-const tools = ['React Native', 'Expo CLI', 'create-react-native-app', 'Node.js', 'Puppeteer.js', 'MongoDB', 'Git', 'Heroku'];
+const tools = ['React Native', 'Expo CLI', 'Node.js', 'Express.js', 'Puppeteer.js', 'MongoDB', 'Git', 'Heroku'];
 
 export default class AboutScreen extends Component {
 
@@ -41,28 +43,35 @@ export default class AboutScreen extends Component {
           imageStyle={{ resizeMode }}
           source={require('../assets/weather/backgrounds/night/clear-night-home.png')}
         >
-        <ScrollView style={styles.container}>
 
           <View style={styles.contentContainer}>
-            <Text style={styles.title}>
-              About this App
-          </Text>
-            <Text style={styles.subtitle}>
-              Colorado Daily Info
-          </Text>
-            <Text style={styles.createdBy}>
-              built by Harry Bell
-          </Text>
-            <Text style={styles.paragraph}>
-              an app made with:
-          </Text>
+            <PageTitle
+              title='About this App'
+              subtitle='built by Harold Bell'
+            />
 
-            {toolsDisplay}
+            <ScrollView style={styles.scrollContainer}>
 
-            <Credits />
+              <View style={styles.contentContainer}>
+
+                <Text style={styles.appName}>
+                  Denver Mountain Daily
+                </Text>
+
+                <Text style={styles.createdBy}>
+                  an app made with:
+                </Text>
+
+                <LinksList
+                  links={tools}
+                />
+
+                <Credits />
+              </View>
+
+            </ScrollView>
+
           </View>
-
-        </ScrollView>
 
         </ImageBackground>
 
@@ -74,73 +83,46 @@ export default class AboutScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgba(0, 80, 255, 0.5)',
   },
   contentContainer: {
-    // flex: 0, 
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
+    flex: 1,
+    // alignItems: 'center',
+    // justifyContent: 'flex-start',
+    backgroundColor: 'rgba(0, 80, 255, 0.5)',
   },
-  title: { 
-    fontFamily: 'Cabin-Bold',
-    textAlign: 'center',
-    color: 'white',
-    fontSize: 32,
-    fontWeight: '400',
-    margin: 50,
+  scrollContainer: {
+    width: '100%'
   },
-  subtitle: {
+
+  appName: {
     fontFamily: 'Cabin',
     textAlign: 'left',
     color: 'white',
-    fontSize: 24,
-    fontWeight: '400',
-    marginTop: 0,
-    marginBottom: 10,
-    marginLeft: 20
-  },
-  createdBy: {
-    fontFamily: 'Cabin',
-    textAlign: 'left',
-    color: 'white',
-    fontSize: 20,
-    fontWeight: '400',
+    fontSize: 12 * PixelRatio.get(),
     marginTop: 0,
     marginBottom: 10,
     marginLeft: 30
   },
 
-  paragraph: {
+  createdBy: {
     fontFamily: 'Cabin',
-    margin: 20,
-    fontSize: 20,
-    fontWeight: '400',
-    color: 'white'
+    textAlign: 'left',
+    color: 'white',
+    fontSize: 10 * PixelRatio.get(),
+    marginTop: 0,
+    marginBottom: 10,
+    marginLeft: 36
   },
+
+
   creditsContainer: {
     // width: '100%',
-  },  
+  },
   credit: {
     fontFamily: 'Cabin',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start'
-  },
-  toolLink: {
-    fontFamily: 'Cabin',
-    margin: 0,
-    marginLeft: 35,
-    fontSize: 20,
-    fontWeight: '400',
-    color: '#00FFFF'
-  },
-  linkText: {
-    fontFamily: 'Cabin',
-    margin: 5,
-    fontSize: 12,
-    fontWeight: '400',
-    color: '#00FFFF'
   },
   authorCreditText: {
     fontFamily: 'Cabin',
@@ -150,15 +132,8 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     margin: 5,
   },
-  
+
 });
 
-const toolsDisplay = tools.map((tool, i) => {
-  return (
-    <TouchableOpacity style={styles.tool} key={i}>
-      <Text style={styles.toolLink}>{tool}</Text>
-    </TouchableOpacity>
-  )
-});
 
 
