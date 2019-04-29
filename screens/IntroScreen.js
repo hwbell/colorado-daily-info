@@ -49,17 +49,12 @@ export default class IntroScreen extends Component {
   // render them together with the provided info
   renderButtons(buttonArr, navigate) {
 
-    const buttonContainerStyle = {
-      paddingTop: 10,
-      flex: 1,
-    }
-
     return (
       <View style={styles.buttonContainer}>
         {
           buttonArr.map((button, i) => {
             return (
-              <TouchableOpacity key={i} style={styles.fullWidthButton} onPress={() => navigate(button.route)}>
+              <TouchableOpacity key={i} style={styles.fullWidthButton} onPress={() => {console.log(button.route); navigate(button.route)}}>
                 <Text style={styles.buttonText}>{button.title}</Text>
               </TouchableOpacity>
             )

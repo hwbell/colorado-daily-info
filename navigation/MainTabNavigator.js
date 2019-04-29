@@ -22,24 +22,20 @@ const tabBarOps = {
   activeTintColor: 'white',
   inactiveTintColor: '#F2F3F4',
   style: {
-    height: 50,
+    height: 55,
     backgroundColor: 'black',
   },
   indicatorStyle: {
     backgroundColor: '#F2F3F4',
   },
   labelStyle: {
-    fontSize: 10,
-    fontFamily: 'Avenir-Roman',
-    fontWeight: 'bold',
-    width: 94,
+    fontSize: 9,
+    fontFamily: 'Cabin',
     marginTop: 4
   },
   tabStyle: {
-    width: 74,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: -4,
   },
   showIcon: true,
 }

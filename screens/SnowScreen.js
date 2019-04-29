@@ -111,7 +111,7 @@ export default class SnowScreen extends Component {
     const aBasin = this.state.aBasin;
     // const keystone = this.state.keystone;
     const openSnow = this.state.openSnow;
-    console.log(`aBasin.pastDaySnow:  ${this.state.aBasin}`)
+    // console.log(`aBasin.pastDaySnow:  ${this.state.aBasin}`)
     //console.log(this.state)
     return (
 
@@ -127,18 +127,12 @@ export default class SnowScreen extends Component {
 
           <PageTitle
             title='Recent Snowfall'
-            subtitle='seek the pow...'
+            subtitle='find the soft stuff'
           />
 
           <ScrollView style={styles.scrollContainer}>
 
             <View style={styles.contentContainer}>
-
-              {/* the daily summary from opensnow */}
-              <View style={styles.summaryTextHolder}>
-                <Text style={styles.descriptionText}>{`${openSnow.summary}`}</Text>
-              </View>
-
 
               {/* iconContainer for each resort / snow report with logo, right now season is ending so only a basin */}
               <View style={styles.iconContainer}>
@@ -150,6 +144,11 @@ export default class SnowScreen extends Component {
                 {/* abasin info */}
                 {this.renderResortInfo(aBasin)}
 
+              </View>
+
+              {/* the daily summary from opensnow */}
+              <View style={styles.summaryTextHolder}>
+                <Text style={styles.descriptionText}>{`Sadly the season is ending, but with summer coming, its time to start planning some hikes in the mountains. This page will soon be replaced by one with some hiking info, stay tuned!`}</Text>
               </View>
 
               {/* keystone info */}

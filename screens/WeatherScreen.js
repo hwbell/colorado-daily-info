@@ -87,7 +87,7 @@ const weatherImagesList = {
 const makeForeCastList = (list) => {
 
   // Dark Sky API makes this a lot more convenient (and accurate!) than open weather map.
-  let forecastList = list.slice(1, list.length); // toss the 1st day, we have that from response.currently (see below)
+  let forecastList = list.slice(0);
 
   let condensedList = []; // we'll make a simple array for the days forecasted
   forecastList.forEach((day) => {
@@ -104,8 +104,8 @@ const makeForeCastList = (list) => {
     condensedList.push({
       desc: day.summary,
       icon: day.icon,
-      tempHigh: day.temperatureHigh,
-      tempLow: day.temperatureLow,
+      tempHigh: Math.floor(day.temperatureHigh),
+      tempLow: Math.floor(day.temperatureLow),
       date: `${month + 1}-${date}` // need to correct for the api's month array
     });
 
@@ -201,7 +201,7 @@ export default class WeatherScreen extends Component {
         console.error(error);
       });
 
-      
+
   }
 
   renderWeatherSelectors() {
@@ -225,7 +225,7 @@ export default class WeatherScreen extends Component {
 
             // color the button depending on which city is currently selected
 
-            console.log(city, this.state.city)
+            {/* console.log(city, this.state.city) */}
             let buttonStyle = {
               backgroundColor: this.state.city === city ? activeButtonColor : buttonColor,
               borderRadius: 20,
@@ -282,16 +282,19 @@ export default class WeatherScreen extends Component {
                 let iconSrc = getWeatherIcon(day.icon);
 
                 return (
-                  <View key={i} style={styles.contentContainer}>
+                  <View key={i} style={styles.forecastHolder}>
 
                     <View style={styles.textHolder}>
-                      <Text style={styles.weatherForecastDescText}>{day.desc}</Text>
-                      <Text style={styles.weatherForecastDescText}>{day.date}</Text>
+                      <Text style={styles.date}>{day.date}</Text>
                     </View>
 
                     <View style={styles.textHolder}>
-                      <Text style={styles.weatherForecastTempText}>{day.tempHigh} &deg;F</Text>
-                      <Text style={styles.weatherForecastTempText}>{day.tempLow} &deg;F</Text>
+                      <Text style={styles.tempHigh}>{day.tempHigh} &deg;F</Text>
+                      <Text style={styles.tempLow}>{day.tempLow} &deg;F</Text>
+                    </View>
+                    
+                    <View style={styles.summaryTextHolder}>
+                      <Text style={styles.summary}>{day.desc}</Text>
                     </View>
 
                     <View style={styles.iconHolder}>
@@ -329,9 +332,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(0, 80, 255, 0.5)',
   },
-  scrollContainer: {
-    // 
-  },
+  
   topTextHolder: {
     marginTop: 12,
     width: '45%'
@@ -356,35 +357,12 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60
   },
-  contentContainer: {
-    flex: 1,
-    padding: 5,
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    // backgroundColor: 'rgba(0, 80, 255, 0.5)',
-    borderColor: 'rgba(245, 245, 245, 0.4)',
-    borderWidth: 0.5,
-    // borderRadius: 20,
-  },
-  textHolder: {
-    // paddingTop: 10,
-    paddingLeft: 18,
-    width: '40%',
-  },
-
-
-  iconHolder: {
-    width: '20%',
-    // marginTop: 30
-  },
   iconImage: {
     // borderRadius: 10,
     // marginRight: 20,
     // marginTop: 8,
-    width: 45,
-    height: 45
+    width: 35,
+    height: 35
   },
   weatherTodayCityText: {
     textAlign: 'center',
@@ -406,12 +384,47 @@ const styles = StyleSheet.create({
     fontFamily: 'Cabin-Bold',
   },
 
-  weatherForecastDescText: {
+  // inside the scrollview
+  forecastHolder: {
+    flex: 1,
+    padding: 5,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: 'rgba(0, 80, 255, 0.5)',
+    borderColor: 'rgba(245, 245, 245, 0.4)',
+    borderWidth: 0.5,
+    // borderRadius: 20,
+  },
+  summaryTextHolder: {
+    width: '45%',
+    paddingLeft: 10,
+  },
+  textHolder: {
+    width: '20%',
+    paddingLeft: 10,
+  },
+  iconHolder: {
+    width: '15%',
+    textAlign: 'right'
+  },
+  summary: {
     color: 'white',
     fontSize: 14,
     fontFamily: 'Cabin',
   },
-  weatherForecastTempText: {
+  date: {
+    color: 'white',
+    fontSize: 20,
+    fontFamily: 'Cabin',
+  },
+  tempHigh: {
+    color: 'white',
+    fontSize: 20,
+    fontFamily: 'Cabin',
+  },
+  tempLow: {
     color: 'white',
     fontSize: 18,
     fontFamily: 'Cabin',
